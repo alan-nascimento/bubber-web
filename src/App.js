@@ -1,7 +1,14 @@
 import React from 'react';
 
+import { SignUp, SignIn } from '~/pages';
+
 function App() {
-  return <div>Hello World!</div>;
+  return (
+    <>
+      <SignUp />
+      <SignIn></SignIn>
+    </>
+  );
 }
 
 export default App;
