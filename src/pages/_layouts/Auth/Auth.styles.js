@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
+import { Background } from '~/assets';
+
 export const Wrapper = styled.div`
   height: 100%;
-  background: #eee;
+  background: url(${Background}) no-repeat center;
+  background-position: 50% 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,10 +14,12 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 315px;
+  max-width: 500px;
   text-align: center;
 
   form {
+    background: #fff;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     margin-top: 30px;
@@ -30,22 +35,6 @@ export const Content = styled.div`
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.7);
-      }
-    }
-
-    button {
-      margin: 5px 0 0;
-      height: 44px;
-      background: #face48;
-      font-weight: bold;
-      color: #fff;
-      border: 0;
-      border-radius: 4px;
-      font-size: 16px;
-      transition: background 0.2s;
-
-      &:hover {
-        background: #face70;
       }
     }
 
