@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 
-import { Background } from '~/assets';
-
 export const Wrapper = styled.div`
-  height: 100%;
-  background: url(${Background}) no-repeat center;
-  background-position: 50% 50%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,13 +12,22 @@ export const Content = styled.div`
   width: 100%;
   max-width: 500px;
   text-align: center;
+  margin: 50px 0;
 
   form {
     background: #fff;
     padding: 50px;
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+    border: 1px solid #ced4d0;
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    div {
+      margin-top: 20px;
+    }
 
     input {
       border: 1px solid #ced0d4;
@@ -37,8 +42,13 @@ export const Content = styled.div`
       }
     }
 
+    button {
+      margin-top: 30px;
+    }
+
     a {
-      color: #fff;
+      color: #face48;
+      font-weight: bold;
       margin-top: 15px;
       font-size: 16px;
       opacity: 0.8;
