@@ -9,7 +9,7 @@ const Rotate = keyframes`
   }
 `;
 
-export const Button = styled.button.attrs(props => ({
+const Button = styled.button.attrs(props => ({
   type: 'submit',
   disabled: props.loading === 'true' && true,
 }))`
@@ -45,3 +45,5 @@ export const Button = styled.button.attrs(props => ({
       }
     `}
 `;
+
+export default Button;
