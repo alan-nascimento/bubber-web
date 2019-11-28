@@ -1,46 +1,55 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Formik, ErrorMessage, Field } from 'formik';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 
-import { Button } from '~/components';
+import { Button, Error } from '~/components';
 
 export default function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   const dispatch = useDispatch();
 
-  const handleEmailChange = e => setEmail(e.target.value);
-  const handlePasswordChange = e => setPassword(e.target.value);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(signInRequest(email, password));
-  }
-
   return (
-    <>
-      <form onSubmit={e => handleSubmit(e)}>
-        <h1>Acesse sua conta</h1>
-        <input
-          type="email"
-          placeholder="E-mail"
-          onChange={e => handleEmailChange(e)}
-          value={email}
-        />
-        <input
-          type="password"
-          onChange={e => handlePasswordChange(e)}
-          value={password}
-          placeholder="Senha"
-        />
-        <Button type="submit">Entrar</Button>
-        <div>
-          Ainda não possui uma conta? <Link to="/register">Cadastre-se</Link>
-        </div>
-      </form>
-    </>
+    <Formik
+      initialValues={{ email: '', password: '' }}
+      validate={values => {
+        const errors = {};
+        if (!values.email) {
+          errors.email = '*obrigatório';
+        } else if (
+          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+        ) {
+          errors.email = 'E-mail inválido';
+        }
+        return errors;
+      }}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          dispatch(signInRequest(values.email, values.password));
+          setSubmitting(false);
+        }, 400);
+      }}
+    >
+      {({ handleSubmit, isSubmitting }) => (
+        <form onSubmit={handleSubmit}>
+          <h1>Acesse sua conta</h1>
+          <span>
+            <ErrorMessage name="email" component="div" />
+            <Field name="email" placeholder="E-mail" />
+          </span>
+          <span>
+            <ErrorMessage name="password" component="div" />
+            <Field type="password" name="password" placeholder="Senha" />
+          </span>
+          <Button type="submit" disabled={isSubmitting}>
+            Entrar
+          </Button>
+          <div>
+            Ainda não possui uma conta? <Link to="/register">Cadastre-se</Link>
+          </div>
+        </form>
+      )}
+    </Formik>
   );
 }

@@ -29,7 +29,15 @@ export const Content = styled.div`
       margin-top: 20px;
     }
 
+    span {
+      min-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
     input {
+      width: 100%
       border: 1px solid #ced0d4;
       border-radius: 4px;
       height: 44px;
