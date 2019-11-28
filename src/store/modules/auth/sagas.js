@@ -1,9 +1,18 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
+import { notification } from 'antd';
 
 import api from '~/services/api';
 import history from '~/routes/history';
 
 import { signInSuccess, signFailure } from './actions';
+
+const openNotification = message => {
+  notification.info({
+    message: 'Falha ao tentar logar!',
+    description: `${message}`,
+    placement: 'topRight',
+  });
+};
 
 export function* signIn({ payload }) {
   try {
@@ -22,6 +31,7 @@ export function* signIn({ payload }) {
 
     history.push('/dashboard');
   } catch (err) {
+    openNotification('Usuário ou senha inválidos.');
     yield put(signFailure());
   }
 }
@@ -58,8 +68,7 @@ export function* signUp({ payload }) {
 
     history.push('/');
   } catch (err) {
-    console.tron.error('Registration falied.');
-
+    openNotification('Não foi possível realizar o cadastro do usuário.');
     yield put(signFailure());
   }
 }

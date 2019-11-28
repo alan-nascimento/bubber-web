@@ -2,10 +2,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Formik, ErrorMessage, Field } from 'formik';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 
-import { Button, Error } from '~/components';
+import { Button } from '~/components';
 
 export default function SignIn() {
   const dispatch = useDispatch();
@@ -43,8 +44,12 @@ export default function SignIn() {
             <ErrorMessage name="password" component="div" />
             <Field type="password" name="password" placeholder="Senha" />
           </span>
-          <Button type="submit" disabled={isSubmitting}>
-            {loading ? 'Carregando...' : 'Entrar'}
+          <Button loading={loading} disabled={isSubmitting}>
+            {loading ? (
+              <AiOutlineLoading3Quarters color="#fff" size={22} />
+            ) : (
+              'Entrar'
+            )}
           </Button>
           <div>
             Ainda não possui uma conta? <Link to="/register">Cadastre-se</Link>
