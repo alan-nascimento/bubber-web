@@ -26,7 +26,11 @@ export default function SignUp() {
           {inputChildren => <input {...inputChildren} type="tel" />}
         </InputMask>
 
-        <InputMask mask="(99) 99999-9999" placeholder="Telefone">
+        <InputMask
+          mask="(99) 99999-9999"
+          maskChar={null}
+          placeholder="Telefone"
+        >
           {inputChildren => <input {...inputChildren} type="text" />}
         </InputMask>
 

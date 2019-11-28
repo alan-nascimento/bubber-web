@@ -37,7 +37,7 @@ export const Content = styled.div`
     }
 
     input {
-      width: 100%
+      width: 100%;
       border: 1px solid #ced0d4;
       border-radius: 4px;
       height: 44px;
