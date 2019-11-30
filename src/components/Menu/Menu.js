@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Menu, Icon, Button } from 'antd';
+import { Icon, Button } from 'antd';
 
-// import { Container } from './Menu.styles';
+import { Menu } from './Menu.styles';
 
 export default function SideMenu() {
   const [collapsed, setCollapsed] = useState(false);
@@ -26,15 +26,11 @@ export default function SideMenu() {
       >
         <Menu.Item key="1">
           <Icon type="pie-chart" />
-          <span>Option 1</span>
+          <span>Minhas excursões</span>
         </Menu.Item>
         <Menu.Item key="2">
           <Icon type="desktop" />
-          <span>Option 2</span>
-        </Menu.Item>
-        <Menu.Item key="3">
-          <Icon type="inbox" />
-          <span>Option 3</span>
+          <span>Minhas viagens</span>
         </Menu.Item>
       </Menu>
     </div>
