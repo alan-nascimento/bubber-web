@@ -20,4 +20,5 @@ export const Container = styled.div`
 export const Content = styled.div`
   background: #fff;
   min-height: 80vh;
+  display: flex;
 `;
