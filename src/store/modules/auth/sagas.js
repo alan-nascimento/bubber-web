@@ -29,7 +29,7 @@ export function* signIn({ payload }) {
 
     yield put(signInSuccess(token, user));
 
-    history.push('/dashboard');
+    history.push('/home');
   } catch (err) {
     openNotification('Usuário ou senha inválidos.');
     yield put(signFailure());
