@@ -1,25 +1,39 @@
 import React, { useState } from 'react';
-
-import { Form, Input, DatePicker, Select, InputNumber, Switch } from 'antd';
-import { Formik } from 'formik';
+import { Formik, Field } from 'formik';
+import InputMask from 'react-input-mask';
 
 import { Button } from '~/components';
+import api from '~/services/api';
 
-import { Modal } from './Excursion.styles';
+import { Modal, Content } from './Excursion.styles';
 
-const { Option } = Select;
-const { RangePicker } = DatePicker;
-
-export function Excursion({ form }) {
+export default function Excursion() {
   const [visible, setVisible] = useState(false);
 
-  const formItemLayout = {
-    labelCol: {
-      sm: { span: 5 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-    },
+  const createExcursion = async ({
+    owner_id = '123',
+    title,
+    departure_address,
+    destiny_address,
+    departure_date,
+    return_date,
+    vacancy_amount,
+    transport_company,
+    payment_types,
+  }) => {
+    const { data } = await api.post('excursions', {
+      owner_id,
+      title,
+      departure_address,
+      destiny_address,
+      departure_date,
+      return_date,
+      vacancy_amount,
+      transport_company,
+      payment_types,
+    });
+
+    console.log(data);
   };
 
   const showModal = () => setVisible(true);
@@ -27,17 +41,6 @@ export function Excursion({ form }) {
   const handleOk = () => setVisible(false);
 
   const handleCancel = () => setVisible(false);
-
-  function onChange(value, dateString) {
-    console.log('Selected Time: ', value);
-    console.log('Formatted Selected Time: ', dateString);
-  }
-
-  function onOk(value) {
-    console.log('onOk: ', value);
-  }
-
-  const { getFieldDecorator } = form;
 
   return (
     <div>
@@ -48,141 +51,102 @@ export function Excursion({ form }) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Formik
-          initialValues={{}}
-          validate={values => {
-            const errors = {};
-            if (!values.email) {
-              errors.email = '*campo obrigatório';
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = 'E-mail inválido';
-            }
-            return errors;
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              // dispatch(signInRequest(values.email, values.password));
-              setSubmitting(false);
-            }, 400);
-          }}
-        >
-          {({ handleSubmit, isSubmitting }) => (
-            <Form {...formItemLayout} onSubmit={handleSubmit}>
-              <Form.Item
-                validateStatus="error"
-                help="O nome da excursão é obrigatório"
-              >
-                <Input placeholder="Nome da viagem" id="error" />
-              </Form.Item>
-              <Form.Item
-                validateStatus="error"
-                help="O endereço do local é obrigatório"
-              >
-                <Input placeholder="Endereço do local" id="warning" />
-              </Form.Item>
+        <Content>
+          <Formik
+            initialValues={{
+              owner_id: '123456',
+              title: '',
+              departure_address: '',
+              destiny_address: '',
+              vacancy_amount: '',
+              transport_company: '',
+              payment_types: '',
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              const {
+                owner_id,
+                title,
+                departure_address,
+                destiny_address,
+                departure_date,
+                return_date,
+                vacancy_amount,
+                transport_company,
+                payment_types,
+              } = values;
 
-              <Form.Item style={{ marginBottom: 0, minWidth: '100%' }}>
-                <Form.Item
-                  validateStatus="error"
-                  help="Por favor, selecione uma data válida"
-                >
-                  <div>
-                    <RangePicker
-                      showTime={{ format: 'HH:mm' }}
-                      format="DD-MM-YYYY HH:mm"
-                      placeholder={['Data de partida', 'Data de volta']}
-                      onChange={onChange}
-                      onOk={onOk}
-                    />
-                  </div>
-                </Form.Item>
-              </Form.Item>
-
-              <Form.Item
-                hasFeedback
-                validateStatus="error"
-                help="O tipo de excursão é obrigatório"
-              >
-                <Select defaultValue="Selecione o tipo de excursão">
-                  <Option value="1">Praia</Option>
-                  <Option value="2">Show</Option>
-                  <Option value="3">Jogo do Corinthians</Option>
-                </Select>
-              </Form.Item>
-
-              <section>
-                <Form.Item hasFeedback validateStatus="success">
-                  <InputNumber min={5} max={100} defaultValue={5} />
-                </Form.Item>
-
-                <Form.Item hasFeedback validateStatus="success">
-                  <InputNumber
-                    defaultValue={0}
-                    formatter={value =>
-                      `R$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                    }
-                    parser={value => value.replace(/\$\s?|(,*)/g, '')}
-                    onChange={onChange}
+              setTimeout(() => {
+                createExcursion(
+                  owner_id,
+                  title,
+                  departure_address,
+                  destiny_address,
+                  departure_date,
+                  return_date,
+                  vacancy_amount,
+                  transport_company,
+                  payment_types
+                );
+                setSubmitting(false);
+              }, 400);
+            }}
+          >
+            {({ handleSubmit, isSubmitting }) => (
+              <form onSubmit={handleSubmit}>
+                <span>
+                  <Field
+                    type="text"
+                    name="title"
+                    placeholder="Nome da excursão"
                   />
-                </Form.Item>
-
-                <Form.Item hasFeedback validateStatus="success">
-                  <InputNumber
-                    defaultValue={0}
-                    formatter={value =>
-                      `R$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                    }
-                    parser={value => value.replace(/\$\s?|(,*)/g, '')}
-                    onChange={onChange}
+                  <Field
+                    name="departure_address"
+                    placeholder="Endereço de partida"
                   />
-                </Form.Item>
-
-                <Form.Item hasFeedback validateStatus="success">
-                  <InputNumber
-                    defaultValue={0}
-                    formatter={value =>
-                      `R$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                    }
-                    parser={value => value.replace(/\$\s?|(,*)/g, '')}
-                    onChange={onChange}
+                  <Field
+                    name="destiny_address"
+                    placeholder="Endereço de destino"
                   />
-                </Form.Item>
-              </section>
-
-              <Form.Item>
-                {getFieldDecorator('select', {
-                  rules: [
-                    {
-                      required: true,
-                      message:
-                        'Por favor, selecione pelo menos uma forma de pagamento',
-                      type: 'array',
-                    },
-                  ],
-                })(
-                  <Select mode="multiple" placeholder="Formas de pagamento">
-                    <Option value="credit-card">Cartão de crédito</Option>
-                    <Option value="invoice">Boleto</Option>
-                    <Option value="cash">Dinheiro</Option>
-                  </Select>
-                )}
-              </Form.Item>
-
-              <section>
-                <Form.Item label="Lista de espera:">
-                  {getFieldDecorator('switch', { valuePropName: 'checked' })(
-                    <Switch />
-                  )}
-                </Form.Item>
-              </section>
-            </Form>
-          )}
-        </Formik>
+                  <InputMask
+                    mask="99/99/9999"
+                    maskChar={null}
+                    name="departure_date"
+                    placeholder="Data de partida"
+                  >
+                    {inputChildren => <Field {...inputChildren} type="text" />}
+                  </InputMask>
+                  <InputMask
+                    mask="99/99/9999"
+                    maskChar={null}
+                    name="return_date"
+                    placeholder="Data de retorno"
+                  >
+                    {inputChildren => <Field {...inputChildren} type="text" />}
+                  </InputMask>
+                  <Field
+                    type="text"
+                    name="vacancy_amount"
+                    placeholder="Quantidade de vagas"
+                  />
+                  <Field
+                    type="text"
+                    name="transport_company"
+                    placeholder="Empresa de transporte"
+                  />
+                  <Field
+                    type="text"
+                    name="payment_types"
+                    placeholder="Formas de pagamento"
+                  />
+                </span>
+                <Button loading="false" disabled={isSubmitting}>
+                  Criar excursão
+                </Button>
+              </form>
+            )}
+          </Formik>
+        </Content>
       </Modal>
     </div>
   );
 }
-
-export default Form.create()(Excursion);

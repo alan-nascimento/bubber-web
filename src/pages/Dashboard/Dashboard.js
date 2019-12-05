@@ -10,7 +10,7 @@ export default function Dashboard() {
   const [excursions, setExcursions] = useState([]);
 
   const getExcursions = async () => {
-    const { data } = await api.get('api/excursions');
+    const { data } = await api.get('excursions');
     setExcursions(data);
   };
 
