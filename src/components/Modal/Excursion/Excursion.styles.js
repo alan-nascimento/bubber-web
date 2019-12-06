@@ -8,8 +8,7 @@ export const Modal = styled(AntdModal)`
   }
 
   .ant-modal-footer {
-    button {
-    }
+    display: none;
   }
 
   section {
@@ -33,7 +32,7 @@ export const Modal = styled(AntdModal)`
 export const Content = styled.div`
   width: 100%;
   text-align: center;
-  margin: 50px 0;
+  margin: 0 0 20px;
 
   form {
     background: #fff;

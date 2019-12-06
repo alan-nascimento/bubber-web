@@ -10,7 +10,7 @@ import { Modal, Content } from './Excursion.styles';
 export default function Excursion() {
   const [visible, setVisible] = useState(false);
 
-  const createExcursion = async ({
+  const createExcursion = async (
     owner_id = '123',
     title,
     departure_address,
@@ -19,8 +19,8 @@ export default function Excursion() {
     return_date,
     vacancy_amount,
     transport_company,
-    payment_types,
-  }) => {
+    payment_types
+  ) => {
     const { data } = await api.post('excursions', {
       owner_id,
       title,
@@ -33,7 +33,7 @@ export default function Excursion() {
       payment_types,
     });
 
-    console.log(data);
+    return data;
   };
 
   const showModal = () => setVisible(true);
@@ -81,8 +81,8 @@ export default function Excursion() {
                   title,
                   departure_address,
                   destiny_address,
-                  departure_date,
-                  return_date,
+                  new Date(departure_date),
+                  new Date(return_date),
                   vacancy_amount,
                   transport_company,
                   payment_types
@@ -110,18 +110,28 @@ export default function Excursion() {
                   <InputMask
                     mask="99/99/9999"
                     maskChar={null}
-                    name="departure_date"
                     placeholder="Data de partida"
                   >
-                    {inputChildren => <Field {...inputChildren} type="text" />}
+                    {inputChildren => (
+                      <Field
+                        {...inputChildren}
+                        name="departure_date"
+                        type="text"
+                      />
+                    )}
                   </InputMask>
                   <InputMask
                     mask="99/99/9999"
                     maskChar={null}
-                    name="return_date"
                     placeholder="Data de retorno"
                   >
-                    {inputChildren => <Field {...inputChildren} type="text" />}
+                    {inputChildren => (
+                      <Field
+                        {...inputChildren}
+                        name="return_date"
+                        type="text"
+                      />
+                    )}
                   </InputMask>
                   <Field
                     type="text"
