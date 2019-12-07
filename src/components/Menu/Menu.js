@@ -3,10 +3,21 @@ import { Icon, Button } from 'antd';
 
 import { Menu } from './Menu.styles';
 
-export default function SideMenu() {
+export default function SideMenu({ setShowExcursions, setShowTravel }) {
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleCollapsed = () => setCollapsed(!collapsed);
+
+  const toggleMenu = () => ({ key }) => {
+    if (key === '1') {
+      setShowExcursions(true);
+      setShowTravel(false);
+      return;
+    }
+
+    setShowExcursions(false);
+    setShowTravel(true);
+  };
 
   return (
     <>
@@ -16,6 +27,7 @@ export default function SideMenu() {
         mode="inline"
         theme="light"
         inlineCollapsed={collapsed}
+        onSelect={toggleMenu()}
       >
         <Button
           type="primary"

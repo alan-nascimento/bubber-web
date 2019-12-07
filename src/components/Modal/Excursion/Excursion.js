@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Formik, Field } from 'formik';
 import InputMask from 'react-input-mask';
 
@@ -10,8 +11,9 @@ import { Modal, Content } from './Excursion.styles';
 export default function Excursion() {
   const [visible, setVisible] = useState(false);
 
+  const profile = useSelector(state => state.user.profile);
+
   const createExcursion = async (
-    owner_id = '123',
     title,
     departure_address,
     destiny_address,
@@ -22,7 +24,7 @@ export default function Excursion() {
     payment_types
   ) => {
     const { data } = await api.post('excursions', {
-      owner_id,
+      owner_id: profile.id,
       title,
       departure_address,
       destiny_address,
@@ -33,6 +35,7 @@ export default function Excursion() {
       payment_types,
     });
 
+    console.log(data);
     return data;
   };
 
@@ -64,7 +67,6 @@ export default function Excursion() {
             }}
             onSubmit={(values, { setSubmitting }) => {
               const {
-                owner_id,
                 title,
                 departure_address,
                 destiny_address,
@@ -77,7 +79,6 @@ export default function Excursion() {
 
               setTimeout(() => {
                 createExcursion(
-                  owner_id,
                   title,
                   departure_address,
                   destiny_address,
