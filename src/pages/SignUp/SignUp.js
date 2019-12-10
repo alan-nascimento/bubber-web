@@ -100,7 +100,7 @@ export default function SignUp() {
             <Field type="text" name="city" placeholder="Cidade" />
             <Field type="text" name="state" placeholder="Estado" />
           </span>
-          <Button type="submit" disabled={isSubmitting}>
+          <Button background="primary" type="submit" disabled={isSubmitting}>
             Criar conta
           </Button>
           <div>

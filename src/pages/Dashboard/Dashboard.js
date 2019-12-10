@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Menu, Excursion, Button, Maps } from '~/components';
+import { Bus } from '~/assets/index';
 
 import { Container, Content, List } from './Dashboard.styles';
 
@@ -14,6 +15,9 @@ export default function Dashboard() {
   const [showExcursions, setShowExcursions] = useState(true);
 
   const profile = useSelector(state => state.user.profile);
+  useEffect(() => {
+    getExcursions();
+  }, []);
 
   const getExcursions = async () => {
     const { data } = await api.get('excursions');
@@ -21,10 +25,6 @@ export default function Dashboard() {
     setTravels(data.filter(excursion => excursion.owner_id !== profile.id));
     setExcursions(data.filter(excursion => excursion.owner_id === profile.id));
   };
-
-  useEffect(() => {
-    getExcursions();
-  });
 
   return (
     <Container>
@@ -41,28 +41,34 @@ export default function Dashboard() {
           <List>
             {excursions.map(excursion => (
               <li key={excursion._id}>
-                <h2>{excursion.title}</h2>
+                <img src={Bus} alt="Bus" />
+
                 <div>
-                  <strong>Endereço de partida</strong>
-                  {excursion.departure_address}
-                </div>
-                <div>
-                  <strong>Endereço de destino</strong>
-                  {excursion.destiny_address}
-                </div>
-                {/* {/* <div>{excursion.return_date || new Date()}</div> */}
-                {/* <div>{excursion.departure_date || new Date()}</div> */}
-                <div>
-                  <strong>Quantidade de vagas</strong>
-                  {excursion.vacancy_amount}
-                </div>
-                <div>
-                  <strong>Formas de pagamento</strong>
-                  {excursion.payment_types}
-                </div>
-                <div>
-                  <strong>Companhia de transporte</strong>
-                  {excursion.transport_company}
+                  <h2>{excursion.title}</h2>
+                  <div>
+                    <strong>{excursion.departure_address}</strong>
+                  </div>
+                  <div>
+                    <strong>Endereço de destino</strong>
+                    {excursion.destiny_address}
+                  </div>
+                  {/* {/* <div>{excursion.return_date || new Date()}</div> */}
+                  {/* <div>{excursion.departure_date || new Date()}</div> */}
+                  <div>
+                    <strong>Quantidade de vagas</strong>
+                    {excursion.vacancy_amount}
+                  </div>
+                  <div>
+                    <strong>Formas de pagamento</strong>
+                    {excursion.payment_types}
+                  </div>
+                  <div>
+                    <strong>Companhia de transporte</strong>
+                    {excursion.transport_company}
+                  </div>
+                  <Button background="primary-outline">
+                    Ver detalhes da excursão
+                  </Button>
                 </div>
               </li>
             ))}
@@ -72,30 +78,33 @@ export default function Dashboard() {
           <List>
             {travels.map(excursion => (
               <li key={excursion._id}>
-                <h2>{excursion.title}</h2>
+                <img src={Bus} alt="Bus" />
                 <div>
-                  <strong>Endereço de partida</strong>
-                  {excursion.departure_address}
+                  <h2>{excursion.title}</h2>
+                  <div>
+                    <strong>Endereço de partida</strong>
+                    {excursion.departure_address}
+                  </div>
+                  <div>
+                    <strong>Endereço de destino</strong>
+                    {excursion.destiny_address}
+                  </div>
+                  {/* {/* <div>{excursion.return_date || new Date()}</div> */}
+                  {/* <div>{excursion.departure_date || new Date()}</div> */}
+                  <div>
+                    <strong>Quantidade de vagas</strong>
+                    {excursion.vacancy_amount}
+                  </div>
+                  <div>
+                    <strong>Formas de pagamento</strong>
+                    {excursion.payment_types}
+                  </div>
+                  <div>
+                    <strong>Companhia de transporte</strong>
+                    {excursion.transport_company}
+                  </div>
+                  <Button background="primary">Ingressar</Button>
                 </div>
-                <div>
-                  <strong>Endereço de destino</strong>
-                  {excursion.destiny_address}
-                </div>
-                {/* {/* <div>{excursion.return_date || new Date()}</div> */}
-                {/* <div>{excursion.departure_date || new Date()}</div> */}
-                <div>
-                  <strong>Quantidade de vagas</strong>
-                  {excursion.vacancy_amount}
-                </div>
-                <div>
-                  <strong>Formas de pagamento</strong>
-                  {excursion.payment_types}
-                </div>
-                <div>
-                  <strong>Companhia de transporte</strong>
-                  {excursion.transport_company}
-                </div>
-                <Button>Ingressar</Button>
               </li>
             ))}
           </List>

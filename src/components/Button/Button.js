@@ -9,28 +9,125 @@ const Rotate = keyframes`
   }
 `;
 
-const Button = styled.button.attrs(props => ({
-  type: 'submit',
-  disabled: props.loading === 'true' && true,
-}))`
-  background: #face48;
-  border: 0;
-  padding: 0 15px;
-  margin-left: 10px;
-  border-radius: 5px;
-  height: 40px;
-  display: flex;
+const Button = styled.button`
+  max-height: ${props => props.shape === 'circle' && '88px'};
+  box-sizing: border-box;
+  min-height: 36px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: ${props => props.shape === 'circle' && '24px'};
+  padding-bottom: ${props => props.shape === 'circle' && '24px'};
+  height: ${props => `${props.height}px`};
+  border: none;
+  margin: 5px;
+  border: ${props =>
+    props.background === 'outline'
+      ? '1px solid #767b85'
+      : props.background === 'primary-outline'
+      ? '1px solid #face48'
+      : props.background === 'success-outline'
+      ? '1px solid #4ac79b'
+      : 'none'};
+  border-radius: ${props => (props.shape === 'circle' ? '50%' : '30px')};
+  box-shadow: ${props =>
+    props.background === 'primary'
+      ? '0 3px 15px 1px rgba(55, 58, 64, 0.14)'
+      : 'none'};
+  background: ${props =>
+    props.background === 'outline'
+      ? '#ffffff'
+      : props.background === 'primary-outline'
+      ? '#ffffff'
+      : props.background === 'success-outline'
+      ? '#ffffff'
+      : props.background === 'success'
+      ? '#4ac79b'
+      : props.background === 'destructive'
+      ? '#ed4f4f'
+      : props.background === 'disabled'
+      ? '#ced0d4'
+      : 'none'};
+  background-image: ${props =>
+    props.background === 'primary' &&
+    'linear-gradient(110deg, #face48, #fcde83)'};
+  color: ${props =>
+    props.background === 'success-outline'
+      ? '#4ac79b'
+      : props.background === 'success'
+      ? '#ffffff'
+      : props.background === 'destructive'
+      ? '#ffffff'
+      : props.background === 'disabled'
+      ? '#ffffff'
+      : '#2d2d2d'};
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: center;
+  outline: 0;
+  transition: 0.3s;
+  cursor: pointer;
+  pointer-events: ${props =>
+    props.background === 'disabled' ? 'none' : 'pointer'};
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  border-radius: 30px;
-  box-shadow: 0 3px 15px 1px rgba(55, 58, 64, 0.14);
-  font-size: 16px;
-  transition: background 0.2s;
-  font-weight: bold;
-
   &:hover {
-    background: #face20;
+    background: ${props =>
+      props.background === 'outline'
+        ? '#f4f4f4'
+        : props.background === 'primary-outline'
+        ? '#fff6e0'
+        : props.background === 'success-outline'
+        ? '#d8f3e9'
+        : props.background === 'success'
+        ? '#35ab82'
+        : props.background === 'destructive'
+        ? '#e82121'
+        : 'none'};
+    background-image: ${props =>
+      props.background === 'primary' &&
+      'linear-gradient(110deg, #f9c116, #fbd151)'};
   }
+  &:active {
+    background: ${props =>
+      props.background === 'primary'
+        ? '#f8bd07'
+        : props.background === 'outline'
+        ? '#e6e6e6'
+        : props.background === 'primary-outline'
+        ? '#ffe7ad'
+        : props.background === 'success-outline'
+        ? '#b1e7d4'
+        : props.background === 'success'
+        ? '#298464'
+        : props.background === 'destructive'
+        ? '#c21414'
+        : 'none'};
+    background-image: ${props =>
+      props.background === 'primary' &&
+      'linear-gradient(110deg, #f8bd07, #facd42)'};
+  }
+  &:focus {
+    box-shadow: ${props =>
+      props.background === 'primary-outline'
+        ? '0px 0px 0 2px #face48'
+        : props.background === 'success-outline'
+        ? '0px 0px 0 2px #4ac79b'
+        : '0px 0px 0 2px #2d2d2d'};
+  }
+  img {
+    margin-right: 10px;
+  }
+  ${props =>
+    props.style &&
+    Object.entries(props.style).map(
+      item => `${item[0]}: ${item[1]} !important;`
+    )}
 
   &[disabled] {
     cursor: not-allowed;

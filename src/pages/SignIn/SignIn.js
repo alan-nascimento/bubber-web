@@ -44,7 +44,11 @@ export default function SignIn() {
             <ErrorMessage name="password" component="div" />
             <Field type="password" name="password" placeholder="Senha" />
           </span>
-          <Button loading={loading.toString()} disabled={isSubmitting}>
+          <Button
+            background="primary"
+            loading={loading.toString()}
+            disabled={isSubmitting}
+          >
             {loading ? (
               <AiOutlineLoading3Quarters color="#fff" size={22} />
             ) : (
