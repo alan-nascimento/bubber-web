@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Menu, Excursion, Button } from '~/components';
+import { Menu, Excursion, Button, Maps } from '~/components';
 
 import { Container, Content, List } from './Dashboard.styles';
 
@@ -101,6 +101,18 @@ export default function Dashboard() {
           </List>
         )}
       </Content>
+      <Maps
+        googleMapURL={
+          'https://maps.googleapis.com/maps/api/js?key=AIzaSyCmJhJzAtPxAmtbTUeIexNWrC0Q1d8V_bo&v=3.exp&libraries=geometry,drawing,places'
+        }
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `350px`, width: '100%' }} />}
+        mapElement={<div style={{ height: `100%`, width: '100%' }} />}
+        dfLatC={-23.561417}
+        dfLngC={-46.660234}
+        mpLatC={-23.5617714}
+        mpLngC={-46.6601914}
+      />
     </Container>
   );
 }
