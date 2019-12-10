@@ -21,42 +21,43 @@ const Button = styled.button`
   border: none;
   margin: 5px;
   border: ${props =>
-    props.type === 'outline'
+    props.background === 'outline'
       ? '1px solid #767b85'
-      : props.type === 'primary-outline'
+      : props.background === 'primary-outline'
       ? '1px solid #face48'
-      : props.type === 'success-outline'
+      : props.background === 'success-outline'
       ? '1px solid #4ac79b'
       : 'none'};
   border-radius: ${props => (props.shape === 'circle' ? '50%' : '30px')};
   box-shadow: ${props =>
-    props.type === 'primary'
+    props.background === 'primary'
       ? '0 3px 15px 1px rgba(55, 58, 64, 0.14)'
       : 'none'};
   background: ${props =>
-    props.type === 'outline'
+    props.background === 'outline'
       ? '#ffffff'
-      : props.type === 'primary-outline'
+      : props.background === 'primary-outline'
       ? '#ffffff'
-      : props.type === 'success-outline'
+      : props.background === 'success-outline'
       ? '#ffffff'
-      : props.type === 'success'
+      : props.background === 'success'
       ? '#4ac79b'
-      : props.type === 'destructive'
+      : props.background === 'destructive'
       ? '#ed4f4f'
-      : props.type === 'disabled'
+      : props.background === 'disabled'
       ? '#ced0d4'
       : 'none'};
   background-image: ${props =>
-    props.type === 'primary' && 'linear-gradient(110deg, #face48, #fcde83)'};
+    props.background === 'primary' &&
+    'linear-gradient(110deg, #face48, #fcde83)'};
   color: ${props =>
-    props.type === 'success-outline'
+    props.background === 'success-outline'
       ? '#4ac79b'
-      : props.type === 'success'
+      : props.background === 'success'
       ? '#ffffff'
-      : props.type === 'destructive'
+      : props.background === 'destructive'
       ? '#ffffff'
-      : props.type === 'disabled'
+      : props.background === 'disabled'
       ? '#ffffff'
       : '#2d2d2d'};
   font-family: 'Roboto';
@@ -70,49 +71,52 @@ const Button = styled.button`
   outline: 0;
   transition: 0.3s;
   cursor: pointer;
-  pointer-events: ${props => (props.type === 'disabled' ? 'none' : 'pointer')};
+  pointer-events: ${props =>
+    props.background === 'disabled' ? 'none' : 'pointer'};
   display: inline-flex;
   justify-content: center;
   align-items: center;
   &:hover {
     background: ${props =>
-      props.type === 'outline'
+      props.background === 'outline'
         ? '#f4f4f4'
-        : props.type === 'primary-outline'
+        : props.background === 'primary-outline'
         ? '#fff6e0'
-        : props.type === 'success-outline'
+        : props.background === 'success-outline'
         ? '#d8f3e9'
-        : props.type === 'success'
+        : props.background === 'success'
         ? '#35ab82'
-        : props.type === 'destructive'
+        : props.background === 'destructive'
         ? '#e82121'
         : 'none'};
     background-image: ${props =>
-      props.type === 'primary' && 'linear-gradient(110deg, #f9c116, #fbd151)'};
+      props.background === 'primary' &&
+      'linear-gradient(110deg, #f9c116, #fbd151)'};
   }
   &:active {
     background: ${props =>
-      props.type === 'primary'
+      props.background === 'primary'
         ? '#f8bd07'
-        : props.type === 'outline'
+        : props.background === 'outline'
         ? '#e6e6e6'
-        : props.type === 'primary-outline'
+        : props.background === 'primary-outline'
         ? '#ffe7ad'
-        : props.type === 'success-outline'
+        : props.background === 'success-outline'
         ? '#b1e7d4'
-        : props.type === 'success'
+        : props.background === 'success'
         ? '#298464'
-        : props.type === 'destructive'
+        : props.background === 'destructive'
         ? '#c21414'
         : 'none'};
     background-image: ${props =>
-      props.type === 'primary' && 'linear-gradient(110deg, #f8bd07, #facd42)'};
+      props.background === 'primary' &&
+      'linear-gradient(110deg, #f8bd07, #facd42)'};
   }
   &:focus {
     box-shadow: ${props =>
-      props.type === 'primary-outline'
+      props.background === 'primary-outline'
         ? '0px 0px 0 2px #face48'
-        : props.type === 'success-outline'
+        : props.background === 'success-outline'
         ? '0px 0px 0 2px #4ac79b'
         : '0px 0px 0 2px #2d2d2d'};
   }

@@ -47,7 +47,9 @@ export default function Excursion() {
 
   return (
     <div>
-      <Button onClick={showModal}>Adicionar excursão</Button>
+      <Button background="primary" onClick={showModal}>
+        Adicionar excursão
+      </Button>
       <Modal
         title="Criar uma excursão"
         visible={visible}

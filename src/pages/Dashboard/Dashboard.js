@@ -66,7 +66,7 @@ export default function Dashboard() {
                     <strong>Companhia de transporte</strong>
                     {excursion.transport_company}
                   </div>
-                  <Button type="primary-outline">
+                  <Button background="primary-outline">
                     Ver detalhes da excursão
                   </Button>
                 </div>
@@ -103,7 +103,7 @@ export default function Dashboard() {
                     <strong>Companhia de transporte</strong>
                     {excursion.transport_company}
                   </div>
-                  <Button type="primary">Ingressar</Button>
+                  <Button background="primary">Ingressar</Button>
                 </div>
               </li>
             ))}
