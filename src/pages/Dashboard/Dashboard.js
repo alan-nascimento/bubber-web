@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Menu, Excursion, Button, Maps } from '~/components';
+import { Menu, Excursion, ExcursionDetail, Button, Maps } from '~/components';
 import { Bus } from '~/assets/index';
 
 import { Container, Content, List } from './Dashboard.styles';
@@ -9,6 +9,7 @@ import { Container, Content, List } from './Dashboard.styles';
 import api from '~/services/api';
 
 export default function Dashboard() {
+  const [excursionDetail, setExcursionDetail] = useState(true);
   const [travels, setTravels] = useState([]);
   const [excursions, setExcursions] = useState([]);
   const [showTravel, setShowTravel] = useState(false);
@@ -26,6 +27,8 @@ export default function Dashboard() {
     setExcursions(data.filter(excursion => excursion.owner_id === profile.id));
   };
 
+  const handleVisible = bool => setExcursionDetail(bool);
+
   return (
     <Container>
       <section>
@@ -33,6 +36,10 @@ export default function Dashboard() {
         <Excursion />
       </section>
       <Content>
+        <ExcursionDetail
+          visible={excursionDetail}
+          handleVisible={handleVisible}
+        />
         <Menu
           setShowExcursions={setShowExcursions}
           setShowTravel={setShowTravel}
@@ -66,7 +73,10 @@ export default function Dashboard() {
                     <strong>Companhia de transporte</strong>
                     {excursion.transport_company}
                   </div>
-                  <Button background="primary-outline">
+                  <Button
+                    background="primary-outline"
+                    onClick={() => setExcursionDetail(true)}
+                  >
                     Ver detalhes da excursão
                   </Button>
                 </div>
@@ -111,9 +121,7 @@ export default function Dashboard() {
         )}
       </Content>
       <Maps
-        googleMapURL={
-          'https://maps.googleapis.com/maps/api/js?key=AIzaSyCmJhJzAtPxAmtbTUeIexNWrC0Q1d8V_bo&v=3.exp&libraries=geometry,drawing,places'
-        }
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmJhJzAtPxAmtbTUeIexNWrC0Q1d8V_bo&v=3.exp&libraries=geometry,drawing,places"
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `350px`, width: '100%' }} />}
         mapElement={<div style={{ height: `100%`, width: '100%' }} />}
