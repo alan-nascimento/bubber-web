@@ -9,30 +9,30 @@ export default function SideMenu() {
   const toggleCollapsed = () => setCollapsed(!collapsed);
 
   return (
-    <div style={{ width: 256 }}>
-      <Button
-        type="primary"
-        onClick={() => toggleCollapsed()}
-        style={{ marginBottom: 16 }}
-      >
-        <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
-      </Button>
+    <>
       <Menu
         defaultSelectedKeys={['1']}
         defaultOpenKeys={['sub1']}
         mode="inline"
-        theme="dark"
+        theme="light"
         inlineCollapsed={collapsed}
       >
+        <Button
+          type="primary"
+          onClick={() => toggleCollapsed()}
+          style={{ marginBottom: 16 }}
+        >
+          <Icon type={collapsed ? 'right' : 'left'} />
+        </Button>
         <Menu.Item key="1">
-          <Icon type="pie-chart" />
+          <Icon type="schedule" />
           <span>Minhas excursões</span>
         </Menu.Item>
         <Menu.Item key="2">
-          <Icon type="desktop" />
+          <Icon type="car" />
           <span>Minhas viagens</span>
         </Menu.Item>
       </Menu>
-    </div>
+    </>
   );
 }

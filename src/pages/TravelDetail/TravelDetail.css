@@ -1,0 +1,206 @@
+.travel-header {
+  position: relative;
+  background: #ccc;
+  width: 100%;
+  height: 100px;
+  height: 220px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.travel-title {
+  position: relative;
+  z-index: 4;
+  color: #fff;
+  font-size: 32px;
+}
+.travel-header_bg {
+  position: absolute;
+  top: 0;
+  border: 1px solid #f00;
+  z-index: 1;
+  width: 100%;
+}
+
+.travel-detail__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.travel-content {
+  display: flex;
+  flex-direction: row;
+  padding: 15px 30px;
+  background: #fff;
+}
+.info-togo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
+.info-togo h2{
+  color: #ccc
+}
+.container-travel-time {
+  margin: 7px 0;
+  border: 1px solid #ccc;
+  border-width: 1px 0 0 0;
+}
+.ico-travel-content {
+  width: 30px;
+  margin-right: 10px;
+}
+
+.departure-data,
+.arrival-data {
+  font-size: 18px;
+}
+.vacancy_amount{
+  border: 1px solid #ccc;
+  border-width: 1px 0 0 0;
+  padding: 25px 0;
+}
+.vacancy_status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.vacancy_status span:first-child {
+  font-size: 18px;
+}
+.vacancy_status span:lastchild {
+  font-size: 18px;
+}
+.vacancy_link_modal {
+  font-size: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.travel_organizer {
+  display: flex;
+  border: 1px solid #ccc;
+  border-width: 1px 0 0 0;
+  padding: 25px 0;
+}
+
+.ico_link_modal {
+  transform: rotate(180deg);
+  width: 24px;
+}
+
+.organizer_img {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.organizer_data {
+  display: flex;
+}
+
+img.organizer_star {
+  width: 20px;
+}
+
+img.ico_organizer_phone,
+img.ico_organizer_chat {
+  width: 20px;
+}
+
+.organizer_contact {
+  width: 20%;
+  display: flex;
+}
+
+.organizer_data {
+  display: flex;
+  flex-direction: column;
+}
+
+.travel_type{
+  border: 1px solid #ccc;
+  border-width: 1px 0 0 0;
+  padding: 25px 0;
+}
+.travel_value{
+  border: 1px solid #ccc;
+  border-width: 1px 0 0 0;
+  padding: 15px 0
+}
+.travel_footer{
+  background: #fff
+}
+
+.btn-passager_action img {
+  width: 70px;
+}
+
+ul.passager_list li {
+  display: flex;
+}
+
+.btn-passager_action {
+  display: flex;
+  flex-direction: column;
+  width: 70px;
+  font-size: 11px;
+  justify-content: center;
+  text-align: center;
+}
+
+.passager_actions {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.passenger_img {
+  width: 35px;
+  margin-right: 15px;
+}
+
+.passenger_data {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+.passenger_data span:last-child{
+  font-size: 21px;
+  margin-top: -5px
+}
+
+.ico_passenger_phone{
+  width: 25px
+}
+
+.ico_passenger_chat{
+  width: 25px
+}
+
+.ico_passenger_delete{
+  width: 25px
+}
+
+.passenger_contact {
+  min-width: 130px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Sobrecarga no ANTD */
+.ant-tabs .ant-tabs-small-bar .ant-tabs-tab {
+  padding: 8px!important;
+}
+.ant-tabs-nav-scroll {
+  text-align: center!important;
+}
+/* Responsividade */
+@media(max-width: 420px){
+  .travel-content{
+    padding: 25px 0;
+  }
+}
