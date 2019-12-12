@@ -1,5 +1,6 @@
 export const Background = require('./images/background.jpg');
 export const Logo = require('./images/logo.png');
+export const Bus = require('./images/bus.png');
 
 // Bright Icons
 export const ibCamera = require('./images/icons/bright/camera.svg');

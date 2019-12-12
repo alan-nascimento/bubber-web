@@ -27,6 +27,7 @@ export const List = styled.ul`
   width: 100%;
 
   li {
+    display: flex;
     list-style: none;
     min-height: 200px;
     max-width: 100%;
@@ -35,6 +36,13 @@ export const List = styled.ul`
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.13);
     padding: 30px;
     margin: 30px;
+
+    img {
+      width: 200px;
+      height: 200px;
+      margin-right: 10px;
+      opacity: 0.6;
+    }
 
     strong {
       &::after {
