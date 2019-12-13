@@ -141,7 +141,7 @@ class TravelDetail extends Component{
             </div>
             <div className="passager_status">
               <p>
-                <span>39/45 </span>
+                <span>39/45</span>
                 <span>lugares preenchidos</span>
               </p>
               <p>
