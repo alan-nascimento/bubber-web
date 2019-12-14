@@ -42,22 +42,8 @@ class Home extends Component{
 
       <div className="home-container">
         <h1>Bem vindo!</h1>
-       { 
-       this.listTravels()
-        
-        //   this.state.dados.map(excursion => (
-        //         <Travel 
-        //           title={excursion.title} 
-        //           destiny={excursion.destiny}
-        //           image_bg = { excursion.image_bg }
-        //           date_start={excursion.departure_date}
-        //           place_start={excursion.departure_address}
-        //           date_end={excursion.return_date}
-        //           place_end={excursion.departure_name}
-        //           togo={excursion.togo}>
-        //         </Travel>
-        //     ) 
-        //   )
+        { 
+          this.listTravels()
         }
         
       </div>
