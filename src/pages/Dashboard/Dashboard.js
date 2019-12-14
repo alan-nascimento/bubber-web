@@ -20,16 +20,17 @@ export default function Dashboard() {
 
   useEffect(() => {
     getExcursions();
+    console.warn('props', excursions);
   }, []);
 
   const getExcursions = async () => {
     const { data } = await api.get('excursions');
 
     setTravels(
-      data.filter(excursion => excursion.owner_id !== profile.id).reverse()
+      data.filter(excursion => excursion.owner_id[0] !== profile.id).reverse()
     );
     setExcursions(
-      data.filter(excursion => excursion.owner_id === profile.id).reverse()
+      data.filter(excursion => excursion.owner_id[0] === profile.id).reverse()
     );
   };
 
