@@ -11,7 +11,7 @@ export default function Routes() {
       <Route path="/register" component={SignUp} />
 
       <Route path="/home" component={Home} isPrivate />
-      <Route path="/travelDetail" component={TravelDetail} isPrivate />
+      <Route path="/travelDetail/:id" component={TravelDetail} isPrivate />
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
 

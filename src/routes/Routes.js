@@ -18,12 +18,13 @@ export default function RouteWrapper({
     return <Redirect to="/" />;
   }
 
-  if (signed && !isPrivate) {
-    return <Redirect to="/travelDetail" />;
-  }
 
   if (signed && !isPrivate) {
     return <Redirect to="/home" />;
+  }
+
+  if (signed && !isPrivate) {
+    return <Redirect to="/travelDetail" />;
   }
 
   if (signed && !isPrivate) {

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { idArrival, idDeparture, idPlaceholder, idBack, idUser, idPhone, idMessages, idStar, idStarFull, idAddUser, idDownload, idDelete  } from '~/assets';
 import { Progress, Modal, Tabs } from 'antd';
+import api from '~/services/api';
 import './TravelDetail.css';
 
 class TravelDetail extends Component{
   state = { 
     visible: false,
-    image_bg: 'https://casadoturista.com.br/wp-content/uploads/2014/11/dwn_grande_71.jpg'
-    
+    image_bg: 'https://casadoturista.com.br/wp-content/uploads/2014/11/dwn_grande_71.jpg',
+    travel: [],
   };
 
   showModal = () => {
@@ -30,6 +31,30 @@ class TravelDetail extends Component{
     });
   };
 
+
+  async componentDidMount() {
+    let travelDetail = await api.post(`travelDetail/${this.props.match.params.id}`)
+    this.setState({
+      travel_name: travelDetail.data.excursion.title,
+      travel_private: travelDetail.data.excursion.private,
+      travel_departure_name: travelDetail.data.excursion.departure_name,
+      travel_departure_date: travelDetail.data.excursion.departure_date,
+      travel_departure_location: travelDetail.data.excursion.departure_location,
+      travel_departure_address: travelDetail.data.excursion.departure_address,
+      travel_destination_name: travelDetail.data.excursion.destination_name,
+      travel_destination_address: travelDetail.data.excursion.destination_address,
+      travel_destination_location: travelDetail.data.excursion.destination_location,
+      travel_return_date: travelDetail.data.excursion.return_date,
+      travel_travel_type: travelDetail.data.excursion.travel_type,
+      travel_unitary_value: travelDetail.data.excursion.unitary_value,
+      travel_vacancies: travelDetail.data.excursion.vacancies,
+      travel_payment_types: travelDetail.data.excursion.payment_types,
+      travel_photos: travelDetail.data.excursion.photos,
+      travel_passengers: travelDetail.data.excursion.passengers,
+      travel_waiting_list: travelDetail.data.excursion.waiting_list,
+    })
+    //this.setState({travel: travelDetail.data.excursion});
+  }
   render(){
     const { TabPane } = Tabs;
     function callback(key) {
@@ -38,7 +63,7 @@ class TravelDetail extends Component{
     return(
       <div className="travel-detail__container">
         <div className="travel-header">
-          <h1 className="travel-title">Nome da Viagem</h1>
+          <h1 className="travel-title">{ this.state.travel_name }</h1>
           <div className="gradient-bg gradient-bg-detail"></div>
           <img src={ this.state.image_bg } alt="" className="travel-header_bg"/>
         </div>
@@ -46,13 +71,16 @@ class TravelDetail extends Component{
         <Tabs defaultActiveKey="1" onChange={callback} size={'small'} animated={ false }>
           <TabPane tab="Info" key="1">
             <div className="info-togo">
-              <h2>99hs para a partida...</h2>
+            <h2> 
+                Dados do schema
+            </h2>
+            { this.state.travel_name }
             </div>
             <div className="container-travel-time">
               <div className="travel-content">
                 <img src={ idDeparture } alt="departure" className="ico-travel-content"/>
                 <div className="departure-text">
-                  <div className="departure-data">Sábado, 23 de nov</div>
+                  <div className="departure-data">{ this.state.travel_departure_date }</div>
                   <div className="departure-time">Partida prevista para às 08:05 </div>
                 </div>
               </div>

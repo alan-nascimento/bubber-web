@@ -6,7 +6,6 @@ const Travel = props => {
   return (
     <div className="travel-container">
       <div className="travel-description">
-        ingressar
         <h1 className="title">{props.title}</h1>
         <span className="address">{props.destiny}</span>
         <div className="gradient-bg" />
@@ -19,12 +18,8 @@ const Travel = props => {
             <p>Partida</p>
             <div className="container-dateTime">
               <div className="travel-dates">
-                <span>{props.date_start_month}</span>
-                <span>{props.date_start_day}</span>
-              </div>
-              <div className="travel-time">
-                <span>{props.date_start_week}</span>
-                <span>{props.date_start_hour}</span>
+                <span>{props.date_start}</span>
+                <span>{props.place_start}</span>
               </div>
             </div>
           </div>
@@ -32,21 +27,16 @@ const Travel = props => {
         <div className="arrival">
           <img src={idArrival} alt="arrival" className="travel-icon" />
           <div className="text-arrival">
-            <p>Partida</p>
+            <p>Chegada</p>
             <div className="container-dateTime">
               <div className="travel-dates">
-                <span>{props.date_end_month}</span>
-                <span>{props.date_end_day}</span>
+              <div className="travel-dates">
+                <span>{props.date_end}</span>
+                <span>{props.place_end}</span>
               </div>
-              <div className="travel-time">
-                <span>{props.date_end_week}</span>
-                <span>{props.date_end_hour}</span>
               </div>
             </div>
           </div>
-        </div>
-        <div className="togo">
-          <span>{props.togo} h</span>
         </div>
       </div>
     </div>
