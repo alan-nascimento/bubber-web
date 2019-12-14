@@ -9,6 +9,7 @@ class TravelDetail extends Component{
     visible: false,
     image_bg: 'https://casadoturista.com.br/wp-content/uploads/2014/11/dwn_grande_71.jpg',
     travel: [],
+    travelInfoLoaded: false,
   };
 
   showModal = () => {
@@ -31,81 +32,63 @@ class TravelDetail extends Component{
     });
   };
 
-
   async componentDidMount() {
     let travelDetail = await api.post(`travelDetail/${this.props.match.params.id}`)
-    this.setState({
-      travel_name: travelDetail.data.excursion.title,
-      travel_private: travelDetail.data.excursion.private,
-      travel_departure_name: travelDetail.data.excursion.departure_name,
-      travel_departure_date: travelDetail.data.excursion.departure_date,
-      travel_departure_location: travelDetail.data.excursion.departure_location,
-      travel_departure_address: travelDetail.data.excursion.departure_address,
-      travel_destination_name: travelDetail.data.excursion.destination_name,
-      travel_destination_address: travelDetail.data.excursion.destination_address,
-      travel_destination_location: travelDetail.data.excursion.destination_location,
-      travel_return_date: travelDetail.data.excursion.return_date,
-      travel_travel_type: travelDetail.data.excursion.travel_type,
-      travel_unitary_value: travelDetail.data.excursion.unitary_value,
-      travel_vacancies: travelDetail.data.excursion.vacancies,
-      travel_payment_types: travelDetail.data.excursion.payment_types,
-      travel_photos: travelDetail.data.excursion.photos,
-      travel_passengers: travelDetail.data.excursion.passengers,
-      travel_waiting_list: travelDetail.data.excursion.waiting_list,
-    })
-    //this.setState({travel: travelDetail.data.excursion});
+    console.log(travelDetail.data.excursion)
+    this.setState({ travel: travelDetail.data.excursion, travelInfoLoaded: true });
   }
+
   render(){
     const { TabPane } = Tabs;
     function callback(key) {
       console.log(key);
     }
-    return(
+    const { travelInfoLoaded } = this.state;
+    return travelInfoLoaded && (
       <div className="travel-detail__container">
         <div className="travel-header">
-          <h1 className="travel-title">{ this.state.travel_name }</h1>
+          <h1 className="travel-title">{ this.state.travel.title }</h1>
           <div className="gradient-bg gradient-bg-detail"></div>
-          <img src={ this.state.image_bg } alt="" className="travel-header_bg"/>
+          <img src="" alt="" className="travel-header_bg"/>
         </div>
         <div className="travel-content">
-        <Tabs defaultActiveKey="1" onChange={callback} size={'small'} animated={ false }>
+        <Tabs defaultActiveKey="1" onChange={ callback } size={'small'} animated={ false }>
           <TabPane tab="Info" key="1">
             <div className="info-togo">
             <h2> 
-                Dados do schema
+                Faltam 99 dias para viagem
             </h2>
-            { this.state.travel_name }
             </div>
             <div className="container-travel-time">
               <div className="travel-content">
                 <img src={ idDeparture } alt="departure" className="ico-travel-content"/>
                 <div className="departure-text">
-                  <div className="departure-data">{ this.state.travel_departure_date }</div>
-                  <div className="departure-time">Partida prevista para às 08:05 </div>
+                  <div className="departure-data">{ this.state.travel.departure_date }</div>
+                  <div className="departure-time">{ this.state.travel.departure_name }</div>
                 </div>
               </div>
               <div className="travel-content">
                 <img src={ idArrival } alt="" className="ico-travel-content"/>
                 <div className="arrival-text">
-                  <div className="arrival-data">Segunda, 25 de nov</div>
-                  <div className="arrival-time">Chegada prevista para às 20:30 </div>
+                  <div className="arrival-data">{ this.state.travel.return_date }</div>
+                  <div className="arrival-time">{ this.state.travel.destination_name }</div>
                 </div>
               </div>
               <div className="travel-content">
                 <img src={ idPlaceholder } alt="" className="ico-travel-content"/>
                 <div className="arrival-text">
-                  <div className="arrival-data">Beto Carreiro World</div>
-                  <div className="arrival-time">Rod. Beto Carrero World - Praia de Armação do...</div>
+                  <div className="arrival-data">{ this.state.travel.destination_name }</div>
+                  <div className="arrival-time">{ this.state.travel.destination_address }</div>
                 </div>
               </div>
             </div>
             <div className="vacancy_amount">
               <div className="vacancy_status">
-                <span>39 confirmados</span>
-                <span>6 vagas restantes</span>
+                <span>{ this.state.travel.paid.length } confirmados</span>
+                <span>{ this.state.travel.vacancies - this.state.travel.paid.length } vagas restantes</span>
               </div>
               <div className="vacancy_bar"> 
-                <Progress percent={80} size="small" />
+                <Progress percent={ (this.state.travel.paid.length / this.state.travel.vacancies ) * 100} size="small" />
               </div>
               <p className="vacancy_hint">
                 Aumente o alcance da sua viagem, torne sua viagem publica e publique o link nas redes sociais. Quanto mais confirmados, maior será seu destaque no Viajjar!!!
@@ -119,9 +102,9 @@ class TravelDetail extends Component{
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
               >
-                <div className="vacancy_line"><span class="vacancy_numbers">45</span><span>lugares disponibilizados</span></div>
-                <div className="vacancy_line"><span class="vacancy_numbers">39</span><span>confirmados</span></div>
-                <div className="vacancy_line"><span class="vacancy_numbers">6</span><span>lugares disponiveis</span></div>
+                <div className="vacancy_line"><span class="vacancy_numbers">{ this.state.travel.vacancies }</span><span>lugares disponibilizados</span></div>
+                <div className="vacancy_line"><span class="vacancy_numbers">{ this.state.travel.vacancies - 10 }</span><span>confirmados</span></div>
+                <div className="vacancy_line"><span class="vacancy_numbers">{ this.state.travel.vacancies - (this.state.travel.vacancies - 10) }</span><span>lugares disponiveis</span></div>
                 <div className="vacancy_line"><span class="vacancy_numbers">4</span><span>na lista de espera</span></div>
               </Modal>
             </div>
@@ -129,14 +112,7 @@ class TravelDetail extends Component{
               <img src={ idUser } alt="" className="organizer_img"/>
               <div className="organizer_data">
                 <span>Organizador</span>
-                <span>Ricardo Justino</span>
-                <div className="organizer_rating">
-                  <img src={ idStarFull } alt="" className="organizer_star"/>
-                  <img src={ idStarFull } alt="" className="organizer_star"/>
-                  <img src={ idStarFull } alt="" className="organizer_star"/>
-                  <img src={ idStar } alt="" className="organizer_star"/>
-                  <img src={ idStar } alt="" className="organizer_star"/>
-                </div>
+                <span>{ this.state.travel.owner_id[0].name }</span>
               </div>
               <div className="organizer_contact">
                 <a href="tel:+5511985485376" className="organizer_phone"><img src={ idPhone } alt="" className="ico_organizer_phone"/></a>
@@ -145,23 +121,15 @@ class TravelDetail extends Component{
             </div>
             <div className="travel_type">
               <span className="type_title">Tipo de viagem</span>
-              <span className="type_text">Passeio de escola</span>
+              <span className="type_text">{ this.state.travel.travel_type }</span>
             </div>
             <div className="travel_value">
               <span className="value_text">Preço por passageiro</span>
-                <span className="value_value">R$ 375,00</span>
-              <span className="value_text">Este valor inclui as seguintes comodidades:</span>
-              <ul>
-                <li>Transporte rodoviário</li>
-                <li>Ticket de entrada (passaporte para os dois dias)</li>
-                <li>Hospedagem</li>
-                <li>Três refeições diárias (café da manhã, almoço e jantar)</li>
-              </ul>
+              <span className="value_value">R$ {this.state.travel.unitary_value},00</span>
             </div> 
             <div className="travel_footer">
-              <button className="btn_invite">Convidar</button>
               <button className="btn_participate">Participar</button>
-            </div> 
+            </div>
           </TabPane>
           <TabPane tab="Passageiros" key="2">
             <div className="info-togo">
@@ -169,13 +137,13 @@ class TravelDetail extends Component{
             </div>
             <div className="passager_status">
               <p>
-                <span>39/45</span>
+                <span>{ this.state.travel.paid.length }/{ this.state.travel.vacancies }</span>
                 <span>lugares preenchidos</span>
               </p>
-              <p>
+              {/* <p>
                 <span>4</span>
                 <span>pessoas na lista de espera</span>
-              </p>              
+              </p>               */}
             </div>
             <div className="passager_actions">
               <div className="btn-passager_action">

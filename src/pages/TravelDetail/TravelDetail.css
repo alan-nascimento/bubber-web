@@ -160,7 +160,10 @@ span.value_value {
 }
 
 .travel_footer{
-  background: #fff
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .btn-passager_action img {
@@ -258,6 +261,16 @@ ul.passager_list li {
   margin-right: 7px;
 }
 
+.btn_participate {
+  width: 80%;
+  max-width: 420px;
+  border: 0;
+  padding: 15px;
+  border-radius: 5px;
+  background: #face48;
+  font-size: 18px;
+}
+
 /* Sobrecarga no ANTD */
 .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {
   padding: 8px!important;
@@ -268,7 +281,7 @@ ul.passager_list li {
 /* Responsividade */
 @media(max-width: 420px){
   .travel-content{
-    padding: 25px 0;
+    padding: 25px 10px;
   }
 }
 
