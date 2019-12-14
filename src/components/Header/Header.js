@@ -14,7 +14,7 @@ export default function Header() {
       <Content>
         <nav>
           <img src={Logo} alt="Bubber" />
-          <Link to="/dashboard">Bubber</Link>
+          <Link to="/home">Bubber</Link>
         </nav>
         <aside>
           <Profile>
