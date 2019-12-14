@@ -99,13 +99,13 @@ export const Content = styled.div`
 export const Header = styled.header`
   height: 80px;
   border-bottom: 1px solid #ced4d0;
-  margin: 0 50px;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 export const List = styled.ul`
-  width: 100%;
+  width: 50%;
 
   li {
     display: flex;
@@ -187,13 +187,39 @@ export const DashedLine = styled.div`
 
 export const Divider = styled.div`
   border-right: 1px solid #ced4d0;
-  height: 100%;
-  margin: 0 10px;
+  height: calc(100% - 30px);
+  margin: 0 20px;
 `;
 
 export const ExcursionValue = styled.div`
   p {
+    font-size: 16px;
     color: #4ac79b;
+    font-weight: bold;
+    margin: 0;
   }
 `;
-export const ExcursionType = styled.div``;
+
+export const ExcursionType = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+
+  svg {
+    margin-right: 10px;
+  }
+`;
+
+export const ListGroup = styled.div`
+  width: 100%;
+  display: flex;
+  margin-top: 30px;
+`;
+
+export const ListTitle = styled.h4`
+  font-size: 20px;
+  font-weight: bold;
+  color: #4ac79b;
+`;

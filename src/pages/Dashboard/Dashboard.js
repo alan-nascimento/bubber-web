@@ -9,9 +9,10 @@ import { Container, Content, List } from './Dashboard.styles';
 import api from '~/services/api';
 
 export default function Dashboard() {
-  const [excursionDetail, setExcursionDetail] = useState(true);
+  const [excursionDetail, setExcursionDetail] = useState(false);
   const [travels, setTravels] = useState([]);
   const [excursions, setExcursions] = useState([]);
+  const [excursion, setExcursion] = useState([]);
   const [showTravel, setShowTravel] = useState(false);
   const [showExcursions, setShowExcursions] = useState(true);
 
@@ -39,6 +40,7 @@ export default function Dashboard() {
         <ExcursionDetail
           visible={excursionDetail}
           handleVisible={handleVisible}
+          data={excursion}
         />
         <Menu
           setShowExcursions={setShowExcursions}
@@ -75,7 +77,10 @@ export default function Dashboard() {
                   </div>
                   <Button
                     background="primary-outline"
-                    onClick={() => setExcursionDetail(true)}
+                    onClick={() => {
+                      setExcursion(excursion);
+                      setExcursionDetail(true);
+                    }}
                   >
                     Ver detalhes da excursão
                   </Button>
