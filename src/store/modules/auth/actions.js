@@ -16,6 +16,7 @@ export function signUpRequest(
   name,
   email,
   password,
+  cpf,
   birthday,
   phone,
   address,
@@ -30,6 +31,7 @@ export function signUpRequest(
     payload: {
       name,
       email,
+      cpf,
       password,
       birthday,
       phone,

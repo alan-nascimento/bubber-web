@@ -30,6 +30,7 @@ export default function SignUp() {
           name,
           email,
           password,
+          cpf,
           birthday,
           phone,
           address,
@@ -46,6 +47,7 @@ export default function SignUp() {
               name,
               email,
               password,
+              cpf,
               birthday,
               phone,
               address,
@@ -70,7 +72,15 @@ export default function SignUp() {
             <Field name="email" placeholder="E-mail" />
             <ErrorMessage name="password" component="div" />
             <Field type="password" name="password" placeholder="Senha" />
-            <ErrorMessage name="birthday" component="div" />
+            <ErrorMessage name="cpf" component="div" />
+            <InputMask
+              mask="999.999.999-99"
+              maskChar={null}
+              name="cpf"
+              placeholder="CPF"
+            >
+              {inputChildren => <Field {...inputChildren} type="text" />}
+            </InputMask>
             <InputMask
               mask="99/99/9999"
               maskChar={null}

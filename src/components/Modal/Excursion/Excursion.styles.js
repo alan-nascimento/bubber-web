@@ -11,15 +11,33 @@ export const Modal = styled(AntdModal)`
     display: none;
   }
 
-  section {
+  article {
     display: flex;
     justify-content: space-between;
 
     .ant-form-item {
       display: flex;
+      flex-direction: column;
 
       .ant-form-item-label {
-        width: 120px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+    }
+  }
+
+  section {
+    display: flex;
+    justify-content: space-between;
+
+    .ant-form-item {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+
+      .ant-form-item-label {
+        width: 50%;
       }
     }
   }
