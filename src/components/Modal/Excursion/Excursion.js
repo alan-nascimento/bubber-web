@@ -15,14 +15,19 @@ import api from '~/services/api';
 import states from '~/utils/enums/states';
 import { Button } from '~/components';
 import { Modal } from './Excursion.styles';
+import Success from '../Success/Success';
 
 const { Option } = Select;
 
-export function Excursion({ form }) {
+export function Excursion({ form, getExcursions }) {
   const [visible, setVisible] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState(false);
+
   const { profile } = useSelector(state => state.user);
 
-  const [inputValues, setInputValues] = useState({
+  const initialValues = {
     departure: {
       address: '',
       city: '',
@@ -46,7 +51,9 @@ export function Excursion({ form }) {
     transport_company: '',
     waiting_list: false,
     payment_types: [],
-  });
+  };
+
+  const [inputValues, setInputValues] = useState(initialValues);
 
   const formItemLayout = {
     labelCol: {
@@ -57,6 +64,8 @@ export function Excursion({ form }) {
     },
   };
 
+  const handleSuccess = bool => setSuccess(bool);
+
   const showModal = () => setVisible(true);
   const handleOk = () => setVisible(false);
   const handleCancel = () => setVisible(false);
@@ -66,11 +75,24 @@ export function Excursion({ form }) {
   const handleSubmit = e => {
     e.preventDefault();
     validateFields(async (err, values) => {
-      await api.post('excursions', {
-        ...values,
-        owner_id: profile.id,
-      });
-      validateFields();
+      try {
+        await api.post('excursions', {
+          ...values,
+          owner_id: profile.id,
+        });
+
+        getExcursions();
+
+        setInputValues(setInputValues);
+        setMessage('Sua excursão foi criada com sucesso!');
+        setError(false);
+        setSuccess(true);
+        validateFields();
+      } catch (err) {
+        setError(true);
+        setMessage('Não foi possivel criar a sua excursão!');
+        setSuccess(true);
+      }
     });
   };
 
@@ -96,6 +118,13 @@ export function Excursion({ form }) {
 
   return (
     <div>
+      <Success
+        visible={success}
+        handleVisible={handleSuccess}
+        message={message}
+        error={error}
+        handleOk={handleOk}
+      />
       <Button background="primary" onClick={showModal}>
         Adicionar excursão
       </Button>
@@ -104,9 +133,10 @@ export function Excursion({ form }) {
         visible={visible}
         onOk={handleOk}
         onCancel={handleCancel}
+        destroyOnClose
       >
         <Form {...formItemLayout} onSubmit={e => handleSubmit(e)}>
-          <Form.Item>
+          <Form.Item hasFeedback>
             {getFieldDecorator('title', {
               rules: [
                 {
@@ -128,7 +158,7 @@ export function Excursion({ form }) {
 
           <h4>Sobre o local de partida:</h4>
 
-          <Form.Item>
+          <Form.Item hasFeedback>
             {getFieldDecorator('departure.address', {
               rules: [
                 {
@@ -152,7 +182,7 @@ export function Excursion({ form }) {
           </Form.Item>
 
           <section style={{ display: 'flex' }}>
-            <Form.Item style={{ width: '32%' }}>
+            <Form.Item hasFeedback style={{ width: '32%' }}>
               {getFieldDecorator('departure.number', {
                 rules: [
                   {
@@ -175,7 +205,7 @@ export function Excursion({ form }) {
               )}
             </Form.Item>
 
-            <Form.Item style={{ width: '32%' }}>
+            <Form.Item hasFeedback style={{ width: '32%' }}>
               {getFieldDecorator('departure.city', {
                 rules: [
                   {
@@ -198,7 +228,7 @@ export function Excursion({ form }) {
               )}
             </Form.Item>
 
-            <Form.Item style={{ width: '32%' }}>
+            <Form.Item hasFeedback style={{ width: '32%' }}>
               {getFieldDecorator('departure.state', {
                 rules: [
                   {
@@ -220,7 +250,7 @@ export function Excursion({ form }) {
 
           <h4>Sobre o local de destino:</h4>
 
-          <Form.Item>
+          <Form.Item hasFeedback>
             {getFieldDecorator('destination.address', {
               rules: [
                 {
@@ -244,7 +274,7 @@ export function Excursion({ form }) {
           </Form.Item>
 
           <section style={{ display: 'flex' }}>
-            <Form.Item style={{ width: '32%' }}>
+            <Form.Item hasFeedback style={{ width: '32%' }}>
               {getFieldDecorator('destination.number', {
                 rules: [
                   {
@@ -267,7 +297,7 @@ export function Excursion({ form }) {
               )}
             </Form.Item>
 
-            <Form.Item style={{ width: '32%' }}>
+            <Form.Item hasFeedback style={{ width: '32%' }}>
               {getFieldDecorator('destination.city', {
                 rules: [
                   {
@@ -290,7 +320,7 @@ export function Excursion({ form }) {
               )}
             </Form.Item>
 
-            <Form.Item style={{ width: '32%' }}>
+            <Form.Item hasFeedback style={{ width: '32%' }}>
               {getFieldDecorator('destination.state', {
                 rules: [
                   {
@@ -323,8 +353,7 @@ export function Excursion({ form }) {
                     format="YYYY-MM-DD HH:mm"
                     placeholder="Data de partida"
                     disabledDate={disabledDate}
-                    // disabledTime={disabledDateTime}
-                    showTime={{ defaultValue: moment('00:00:00', 'HH:mm') }}
+                    showTime={{ defaultValue: moment('00:00', 'HH:mm') }}
                     onOk={({ _d: date }) =>
                       setInputValues({
                         ...inputValues,
@@ -346,8 +375,7 @@ export function Excursion({ form }) {
                     format="YYYY-MM-DD HH:mm"
                     placeholder="Data de retorno"
                     disabledDate={disabledDate}
-                    // disabledTime={disabledDateTime}
-                    showTime={{ defaultValue: moment('00:00:00', 'HH:mm') }}
+                    showTime={{ defaultValue: moment('00:00', 'HH:mm') }}
                     onOk={({ _d: date }) =>
                       setInputValues({
                         ...inputValues,
@@ -363,11 +391,6 @@ export function Excursion({ form }) {
           <section style={{ display: 'flex' }}>
             <Form.Item label="Excursão privada:">
               {getFieldDecorator('private', {
-                rules: [
-                  {
-                    required: true,
-                  },
-                ],
                 initialValue: inputValues.private,
               })(
                 <>
@@ -387,7 +410,7 @@ export function Excursion({ form }) {
             </Form.Item>
           </section>
 
-          <Form.Item>
+          <Form.Item hasFeedback>
             {getFieldDecorator('transport_company', {
               rules: [
                 {
@@ -411,7 +434,11 @@ export function Excursion({ form }) {
           </Form.Item>
 
           <article style={{ display: 'flex' }}>
-            <Form.Item label="Tipo de excursão" style={{ width: '32%' }}>
+            <Form.Item
+              hasFeedback
+              label="Tipo de excursão"
+              style={{ width: '32%' }}
+            >
               {getFieldDecorator('travel_type', {
                 rules: [
                   {
