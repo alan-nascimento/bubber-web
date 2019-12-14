@@ -17,6 +17,7 @@ export default function Dashboard() {
   const [showExcursions, setShowExcursions] = useState(true);
 
   const profile = useSelector(state => state.user.profile);
+
   useEffect(() => {
     getExcursions();
   }, []);
@@ -24,8 +25,12 @@ export default function Dashboard() {
   const getExcursions = async () => {
     const { data } = await api.get('excursions');
 
-    setTravels(data.filter(excursion => excursion.owner_id !== profile.id));
-    setExcursions(data.filter(excursion => excursion.owner_id === profile.id));
+    setTravels(
+      data.filter(excursion => excursion.owner_id !== profile.id).reverse()
+    );
+    setExcursions(
+      data.filter(excursion => excursion.owner_id === profile.id).reverse()
+    );
   };
 
   const handleVisible = bool => setExcursionDetail(bool);
@@ -34,7 +39,7 @@ export default function Dashboard() {
     <Container>
       <section>
         <h1>{showExcursions ? 'Minhas excursões' : 'Minhas viagens'}</h1>
-        <Excursion />
+        <Excursion getExcursions={getExcursions} />
       </section>
       <Content>
         <ExcursionDetail
