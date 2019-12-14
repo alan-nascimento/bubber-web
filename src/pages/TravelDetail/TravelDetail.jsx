@@ -38,6 +38,25 @@ class TravelDetail extends Component{
     this.setState({ travel: travelDetail.data.excursion, travelInfoLoaded: true });
   }
 
+  listPassengers = () => {      
+      return this.state.travel.passengers.map((passenger) => {
+        return (
+          <li key={passenger._id}>
+            <img src={ idUser } alt="" className="passenger_img"/>
+            <div className="passenger_data">
+              <span>Passageiro</span>
+              <span>{ passenger.name }</span>
+            </div>
+            <div className="passenger_contact">
+              <a href={`tel:+55${passenger.cell_phone}`}  className="passenger_phone"><img src={ idPhone } alt="" className="ico_passenger_phone"/></a>
+              <a href="" className="passenger_chat"><img src={ idMessages } alt="" className="ico_passenger_chat"/></a>
+              <a href="" className="passenger_chat"><img src={ idDelete } alt="" className="ico_passenger_delete"/></a>
+            </div>
+          </li>
+        );
+      });
+    }
+
   render(){
     const { TabPane } = Tabs;
     function callback(key) {
@@ -102,10 +121,10 @@ class TravelDetail extends Component{
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
               >
-                <div className="vacancy_line"><span class="vacancy_numbers">{ this.state.travel.vacancies }</span><span>lugares disponibilizados</span></div>
-                <div className="vacancy_line"><span class="vacancy_numbers">{ this.state.travel.vacancies - 10 }</span><span>confirmados</span></div>
-                <div className="vacancy_line"><span class="vacancy_numbers">{ this.state.travel.vacancies - (this.state.travel.vacancies - 10) }</span><span>lugares disponiveis</span></div>
-                <div className="vacancy_line"><span class="vacancy_numbers">4</span><span>na lista de espera</span></div>
+                <div className="vacancy_line"><span className="vacancy_numbers">{ this.state.travel.vacancies }</span><span>lugares disponibilizados</span></div>
+                <div className="vacancy_line"><span className="vacancy_numbers">{ this.state.travel.paid.length }</span><span>confirmados</span></div>
+                <div className="vacancy_line"><span className="vacancy_numbers">{ this.state.travel.vacancies - this.state.travel.paid.length }</span><span>lugares disponiveis</span></div>
+                {/* <div className="vacancy_line"><span className="vacancy_numbers">4</span><span>na lista de espera</span></div> */}
               </Modal>
             </div>
             <div className="travel_passenger">
@@ -156,18 +175,9 @@ class TravelDetail extends Component{
               </div>
             </div>
             <ul className="passager_list">
-              <li>
-                <img src={ idUser } alt="" className="passenger_img"/>
-                <div className="passenger_data">
-                  <span>Passageiro</span>
-                  <span>Rolando Caio da Rocha</span>
-                </div>
-                <div className="passenger_contact">
-                  <a href="tel:+5511985485376" className="passenger_phone"><img src={ idPhone } alt="" className="ico_passenger_phone"/></a>
-                  <a href="" className="passenger_chat"><img src={ idMessages } alt="" className="ico_passenger_chat"/></a>
-                  <a href="" className="passenger_chat"><img src={ idDelete } alt="" className="ico_passenger_delete"/></a>
-                </div>
-              </li>
+              { 
+                this.listPassengers()
+              }
             </ul>
           </TabPane>
           <TabPane tab="Contabilidade" key="3">

@@ -172,6 +172,7 @@ span.value_value {
 
 ul.passager_list li {
   display: flex;
+  margin: 25px 0;
 }
 
 .btn-passager_action {
@@ -269,6 +270,13 @@ ul.passager_list li {
   border-radius: 5px;
   background: #face48;
   font-size: 18px;
+}
+
+span.vacancy_numbers {
+  font-size: 32px;
+  margin-right: 7px;
+  font-weight: bold;
+  color: #777;
 }
 
 /* Sobrecarga no ANTD */
