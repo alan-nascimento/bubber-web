@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Menu, Excursion, ExcursionDetail, Button, Maps } from '~/components';
-import { Bus } from '~/assets/index';
+import { Bus } from '~/assets';
 import Travel from '../../components/Travel/Travel';
 
 import { Container, Content, List } from './Home.styles';
