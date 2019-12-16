@@ -86,7 +86,7 @@ class TravelDetail extends Component {
   }
 
   listPassengers = () => {
-    return this.state.travel.passengers.map(passenger => {
+    return this.state.travel.pending_passengers.map(passenger => {
       return (
         <li key={passenger._id}>
           <img src={idUser} alt="" className="passenger_img" />
