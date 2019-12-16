@@ -56,93 +56,37 @@ export default function Home() {
         />
         {showExcursions && (
           <List>
-            {excursions.map(
-              excursion => (
-                <Link key={excursion._id} to={`/travelDetail/${excursion._id}`}>
-                  <Travel
-                    title={excursion.title}
-                    destiny={excursion.destiny}
-                    image_bg={excursion.image_bg}
-                    date_start={excursion.departure_date}
-                    place_start={excursion.departure_address}
-                    date_end={excursion.return_date}
-                    place_end={excursion.departure_name}
-                    togo={excursion.togo}
-                  />
-                </Link>
-              )
-              // <li key={excursion._id}>
-              //   <img src={Bus} alt="Bus" />
-
-              //   <div>
-              //     <h2>{excursion.title}</h2>
-              //     <div>
-              //       <strong>{excursion.departure_address}</strong>
-              //     </div>
-              //     <div>
-              //       <strong>Endereço de destino</strong>
-              //       {excursion.destiny_address}
-              //     </div>
-              //     {/* {/* <div>{excursion.return_date || new Date()}</div> */}
-              //     {/* <div>{excursion.departure_date || new Date()}</div> */}
-              //     <div>
-              //       <strong>Quantidade de vagas</strong>
-              //       {excursion.vacancy_amount}
-              //     </div>
-              //     <div>
-              //       <strong>Formas de pagamento</strong>
-              //       {excursion.payment_types}
-              //     </div>
-              //     <div>
-              //       <strong>Companhia de transporte</strong>
-              //       {excursion.transport_company}
-              //     </div>
-              //     <Button
-              //       background="primary-outline"
-              //       onClick={() => {
-              //         setExcursion(excursion);
-              //         setExcursionDetail(true);
-              //       }}
-              //     >
-              //       Ver detalhes da excursão
-              //     </Button>
-              //   </div>
-              // </li>
-            )}
+            {excursions.map(excursion => (
+              <Link key={excursion._id} to={`/travelDetail/${excursion._id}`}>
+                <Travel
+                  title={excursion.title}
+                  destiny={excursion.destiny}
+                  image_bg={excursion.image_bg}
+                  date_start={excursion.departure_date}
+                  place_start={excursion.departure_address}
+                  date_end={excursion.return_date}
+                  place_end={excursion.departure_name}
+                  togo={excursion.togo}
+                />
+              </Link>
+            ))}
           </List>
         )}
         {showTravel && (
           <List>
             {travels.map(excursion => (
-              <li key={excursion._id}>
-                <img src={Bus} alt="Bus" />
-                <div>
-                  <h2>{excursion.title}</h2>
-                  <div>
-                    <strong>Endereço de partida</strong>
-                    {excursion.departure_address}
-                  </div>
-                  <div>
-                    <strong>Endereço de destino</strong>
-                    {excursion.destiny_address}
-                  </div>
-                  {/* {/* <div>{excursion.return_date || new Date()}</div> */}
-                  {/* <div>{excursion.departure_date || new Date()}</div> */}
-                  <div>
-                    <strong>Quantidade de vagas</strong>
-                    {excursion.vacancy_amount}
-                  </div>
-                  <div>
-                    <strong>Formas de pagamento</strong>
-                    {excursion.payment_types}
-                  </div>
-                  <div>
-                    <strong>Companhia de transporte</strong>
-                    {excursion.transport_company}
-                  </div>
-                  <Button background="primary">Ingressar</Button>
-                </div>
-              </li>
+              <Link key={excursion._id} to={`/travelDetail/${excursion._id}`}>
+                <Travel
+                  title={excursion.title}
+                  destiny={excursion.destiny}
+                  image_bg={excursion.image_bg}
+                  date_start={excursion.departure_date}
+                  place_start={excursion.departure_address}
+                  date_end={excursion.return_date}
+                  place_end={excursion.departure_name}
+                  togo={excursion.togo}
+                />
+              </Link>
             ))}
           </List>
         )}
