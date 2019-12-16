@@ -73,11 +73,6 @@ class TravelDetail extends Component{
         <div className="travel-content">
         <Tabs defaultActiveKey="1" onChange={ callback } size={'small'} animated={ false }>
           <TabPane tab="Info" key="1">
-            <div className="info-togo">
-            <h2> 
-                Faltam 99 dias para viagem
-            </h2>
-            </div>
             <div className="container-travel-time">
               <div className="travel-content">
                 <img src={ idDeparture } alt="departure" className="ico-travel-content"/>
@@ -110,7 +105,7 @@ class TravelDetail extends Component{
                 <Progress percent={ (this.state.travel.paid.length / this.state.travel.vacancies ) * 100} size="small" />
               </div>
               <p className="vacancy_hint">
-                Aumente o alcance da sua viagem, torne sua viagem publica e publique o link nas redes sociais. Quanto mais confirmados, maior será seu destaque no Viajjar!!!
+                Aumente o alcance da sua viagem, torne sua viagem publica e publique o link nas redes sociais. Quanto mais confirmados, maior será seu destaque no Bubber!!!
               </p>
               <div className="vacancy_link_modal">
                 <span onClick={this.showModal}>Passageiros que confirmaram <img src={ idBack } alt="" className="ico_link_modal"/></span>
@@ -135,7 +130,6 @@ class TravelDetail extends Component{
               </div>
               <div className="organizer_contact">
                 <a href="tel:+5511985485376" className="organizer_phone"><img src={ idPhone } alt="" className="ico_organizer_phone"/></a>
-                <a href="" className="organizer_chat"><img src={ idMessages } alt="" className="ico_organizer_chat"/></a>
               </div>
             </div>
             <div className="travel_type">
@@ -151,9 +145,6 @@ class TravelDetail extends Component{
             </div>
           </TabPane>
           <TabPane tab="Passageiros" key="2">
-            <div className="info-togo">
-              <h2>99hs para a partida...</h2>
-            </div>
             <div className="passager_status">
               <p>
                 <span>{ this.state.travel.paid.length }/{ this.state.travel.vacancies }</span>
@@ -164,7 +155,7 @@ class TravelDetail extends Component{
                 <span>pessoas na lista de espera</span>
               </p>               */}
             </div>
-            <div className="passager_actions">
+            {/* <div className="passager_actions">
               <div className="btn-passager_action">
                 <img src={ idAddUser } alt="" className=""/>
                 <span>Adicionar passageiro manualmente</span>
@@ -173,17 +164,14 @@ class TravelDetail extends Component{
                 <img src={ idDownload } alt="" className=""/>
                 <span>Download / Exportar lista de passageiros</span>
               </div>
-            </div>
+            </div> */}
             <ul className="passager_list">
               { 
                 this.listPassengers()
               }
             </ul>
           </TabPane>
-          <TabPane tab="Contabilidade" key="3">
-            <div className="info-togo">
-              <h2>99hs para a partida...</h2>
-            </div>
+          {/* <TabPane tab="Contabilidade" key="3">
             <div className="info_amount">
               <p>
                 <span>R$ 16.875,00</span>
@@ -218,7 +206,7 @@ class TravelDetail extends Component{
                 <span>R$ 2.125,00</span>
               </p>
             </div>
-          </TabPane>
+          </TabPane> */}
         </Tabs>
   
         </div>
