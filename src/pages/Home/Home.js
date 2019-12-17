@@ -16,6 +16,7 @@ export default function Home() {
   const [excursion, setExcursion] = useState([]);
   const [showTravel, setShowTravel] = useState(false);
   const [showExcursions, setShowExcursions] = useState(true);
+  const [showNext, setShowNext] = useState(false);
 
   const profile = useSelector(state => state.user.profile);
 
@@ -52,7 +53,7 @@ export default function Home() {
         <Menu
           setShowExcursions={setShowExcursions}
           setShowTravel={setShowTravel}
-          // setNewExcursions={setNewExcursions}
+          setShowNext={setShowNext}
         />
         {showExcursions && (
           <List>
@@ -75,6 +76,24 @@ export default function Home() {
         {showTravel && (
           <List>
             {travels.map(excursion => (
+              <Link key={excursion._id} to={`/travelDetail/${excursion._id}`}>
+                <Travel
+                  title={excursion.title}
+                  destiny={excursion.destiny}
+                  image_bg={excursion.image_bg}
+                  date_start={excursion.departure_date}
+                  place_start={excursion.departure_address}
+                  date_end={excursion.return_date}
+                  place_end={excursion.departure_name}
+                  togo={excursion.togo}
+                />
+              </Link>
+            ))}
+          </List>
+        )}
+        {showNext && (
+          <List>
+            {excursions.filter(excursion => (
               <Link key={excursion._id} to={`/travelDetail/${excursion._id}`}>
                 <Travel
                   title={excursion.title}

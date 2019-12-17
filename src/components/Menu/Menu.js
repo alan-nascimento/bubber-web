@@ -3,7 +3,11 @@ import { Icon, Button } from 'antd';
 
 import { Menu } from './Menu.styles';
 
-export default function SideMenu({ setShowExcursions, setShowTravel }) {
+export default function SideMenu({
+  setShowExcursions,
+  setShowTravel,
+  setShowNext,
+}) {
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleCollapsed = () => setCollapsed(!collapsed);
@@ -12,11 +16,27 @@ export default function SideMenu({ setShowExcursions, setShowTravel }) {
     if (key === '1') {
       setShowExcursions(true);
       setShowTravel(false);
+      setShowNext(false);
       return;
     }
 
-    setShowExcursions(false);
-    setShowTravel(true);
+    if (key === '2') {
+      setShowExcursions(false);
+      setShowTravel(true);
+      setShowNext(false);
+    }
+
+    if (key === '3') {
+      setShowExcursions(false);
+      setShowTravel(false);
+      setShowNext(true);
+    }
+
+    if (key === '4') {
+      setShowExcursions(false);
+      setShowTravel(false);
+      setShowNext(false);
+    }
   };
 
   return (
@@ -42,7 +62,15 @@ export default function SideMenu({ setShowExcursions, setShowTravel }) {
         </Menu.Item>
         <Menu.Item key="2">
           <Icon type="car" />
-          <span>Minhas viagens</span>
+          <span>Novas viagens</span>
+        </Menu.Item>
+        <Menu.Item key="3">
+          <Icon type="car" />
+          <span>Proximas viagens</span>
+        </Menu.Item>
+        <Menu.Item key="4">
+          <Icon type="car" />
+          <span>Viagens realizadas</span>
         </Menu.Item>
       </Menu>
     </>
