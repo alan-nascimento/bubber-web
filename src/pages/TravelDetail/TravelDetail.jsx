@@ -75,6 +75,10 @@ class TravelDetail extends Component {
   };
 
   async componentDidMount() {
+    let travelDetail = await api.post(`travelDetail/${this.props.match.params.id}`)
+    this.setState({ travel: travelDetail.data.excursion, travelInfoLoaded: true });
+  }
+  async componentDidMount() {
     let travelDetail = await api.post(
       `travelDetail/${this.props.match.params.id}`
     );
@@ -100,9 +104,6 @@ class TravelDetail extends Component {
               className="passenger_phone"
             >
               <img src={idPhone} alt="" className="ico_passenger_phone" />
-            </a>
-            <a href="" className="passenger_chat">
-              <img src={idMessages} alt="" className="ico_passenger_chat" />
             </a>
             <a href="" className="passenger_chat">
               <img src={idDelete} alt="" className="ico_passenger_delete" />
@@ -144,6 +145,7 @@ class TravelDetail extends Component {
                 onChange={callback}
                 size={'small'}
                 animated={false}
+
               >
                 <TabPane tab="Info" key="1">
                   <div className="info-togo">
@@ -195,10 +197,10 @@ class TravelDetail extends Component {
                       />
                       <div className="arrival-text">
                         <div className="arrival-data">
-                          {this.state.travel.destination_name}
+                          {this.state.travel.title}
                         </div>
                         <div className="arrival-time">
-                          {this.state.travel.destination_address}
+                          {this.state.travel.destination.address}, {this.state.travel.destination.number} - {this.state.travel.destination.city} - {this.state.travel.destination.state}
                         </div>
                       </div>
                     </div>
@@ -227,9 +229,9 @@ class TravelDetail extends Component {
                       />
                     </div>
                     <p className="vacancy_hint">
-                      Aumente o alcance da sua viagem, torne sua viagem publica
-                      e publique o link nas redes sociais. Quanto mais
-                      confirmados, maior será seu destaque no Viajjar!!!
+                      Aumente o alcance da sua viagem, tornando sua viagem publica
+                      e divulgando o link nas redes sociais. Quanto mais
+                      confirmados, maior será seu destaque no Bubber!!!
                     </p>
                     <div className="vacancy_link_modal">
                       <span onClick={this.showModal}>
@@ -262,7 +264,6 @@ class TravelDetail extends Component {
                         </span>
                         <span>lugares disponiveis</span>
                       </div>
-                      {/* <div className="vacancy_line"><span className="vacancy_numbers">4</span><span>na lista de espera</span></div> */}
                     </Modal>
                   </div>
                   <div className="travel_passenger">
@@ -277,13 +278,6 @@ class TravelDetail extends Component {
                           src={idPhone}
                           alt=""
                           className="ico_organizer_phone"
-                        />
-                      </a>
-                      <a href="" className="organizer_chat">
-                        <img
-                          src={idMessages}
-                          alt=""
-                          className="ico_organizer_chat"
                         />
                       </a>
                     </div>
@@ -329,69 +323,8 @@ class TravelDetail extends Component {
                       </span>
                       <span>lugares preenchidos</span>
                     </p>
-                    {/* <p>
-                <span>4</span>
-                <span>pessoas na lista de espera</span>
-              </p>               */}
-                  </div>
-                  <div className="passager_actions">
-                    <div className="btn-passager_action">
-                      <img src={idAddUser} alt="" className="" />
-                      <span>Adicionar passageiro manualmente</span>
-                    </div>
-                    <div className="btn-passager_action">
-                      <img src={idDownload} alt="" className="" />
-                      <span>Download / Exportar lista de passageiros</span>
-                    </div>
                   </div>
                   <ul className="passager_list">{this.listPassengers()}</ul>
-                </TabPane>
-                <TabPane tab="Contabilidade" key="3">
-                  <div className="info-togo">
-                    <h2>
-                      Faltam{' '}
-                      {Math.abs(
-                        new Date(this.state.travel.departure_date).getDate() *
-                          24 -
-                          new Date().getDate() * 24
-                      )}{' '}
-                      horas para a partida...
-                    </h2>
-                  </div>
-                  <div className="info_amount">
-                    <p>
-                      <span>R$ 16.875,00</span>
-                      <span>total da viagem</span>
-                    </p>
-                    <p>
-                      <span>R$14.625,00</span>
-                      <span>arrecadado até agora</span>
-                    </p>
-                  </div>
-                  <div className="info_detail-amout">
-                    <p>
-                      <span>R$ 3.000,00</span>
-                      <span>cia de onibus</span>
-                    </p>
-                    <p>
-                      <span>R$ 4.500,00</span>
-                      <span>ticket do parque</span>
-                    </p>
-                    <p>
-                      <span>R$ 3.500,00</span>
-                      <span>hospedagem</span>
-                    </p>
-                    <p>
-                      <span>R$ 1.500,00</span>
-                      <span>alimentação</span>
-                    </p>
-                  </div>
-                  <div className="info_total">
-                    <p>
-                      <span>Lucro de </span>
-                      <span>R$ 2.125,00</span>
-                    </p>
-                  </div>
                 </TabPane>
               </Tabs>
             </div>
