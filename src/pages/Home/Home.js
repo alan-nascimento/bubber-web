@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Menu, Excursion, ExcursionDetail, Button, Maps } from '~/components';
-import { Bus } from '~/assets';
+import { Menu, Excursion, ExcursionDetail, Maps } from '~/components';
 import Travel from '../../components/Travel/Travel';
 
 import { Container, Content, List } from './Home.styles';
@@ -53,6 +52,7 @@ export default function Home() {
         <Menu
           setShowExcursions={setShowExcursions}
           setShowTravel={setShowTravel}
+          // setNewExcursions={setNewExcursions}
         />
         {showExcursions && (
           <List>
