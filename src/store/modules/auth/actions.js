@@ -50,3 +50,9 @@ export function signFailure() {
     type: '@auth/SIGN_IN_FAILURE',
   };
 }
+
+export function signOut() {
+  return {
+    type: '@auth/SIGN_OUT',
+  };
+}
