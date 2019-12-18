@@ -100,7 +100,7 @@ export default function Home() {
                       size={12}
                       style={{ marginRight: '5px' }}
                     />
-                    {formatDate(excursion.departure_date)}
+                    {formatDate(excursion.destination_date)}
                   </div>
                   <h3 style={{ marginTop: '10px' }}>Retorno</h3>
                   <div>
@@ -119,7 +119,7 @@ export default function Home() {
                       size={12}
                       style={{ marginRight: '5px' }}
                     />
-                    {formatDate(excursion.destination_date)}
+                    {formatDate(excursion.departure_date)}
                   </div>
                   <h3 style={{ marginTop: '10px' }}>Sobre a viagem</h3>
                   <div>
