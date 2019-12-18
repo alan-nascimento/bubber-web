@@ -19,8 +19,8 @@ export default function Header() {
     <Container>
       <Content>
         <nav>
-          <img src={Logo} alt="Bubber" />
-          <Link to="/home">Bubber</Link>
+          <img src={Logo} alt="excurse" />
+          <Link to="/home">Excurse</Link>
         </nav>
         <aside>
           <Profile>
@@ -31,7 +31,7 @@ export default function Header() {
               </a>
             </div>
             <img
-              src="https://api.adorable.io/avatars/50/abott@adorable.png"
+              src="https://api.adorable.io/avatars/40/abott@adorable.png"
               alt={profile.name}
             />
           </Profile>

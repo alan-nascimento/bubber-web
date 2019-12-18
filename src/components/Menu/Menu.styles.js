@@ -9,7 +9,7 @@ export const Menu = styled(AntMenu)`
     color: #2d2d2d;
 
     &::after {
-      border-right: 3px solid #face48 !important;
+      border-right: 3px solid #EA1D2C !important;
     }
 
     &:hover {
@@ -18,24 +18,24 @@ export const Menu = styled(AntMenu)`
   }
 
   .ant-menu-item-selected {
-    color: #face48;
+    color: #EA1D2C;
     font-weight: bold;
     background-color: #fefefe !important ;
 
     &:hover {
-      color: #face48;
+      color: #EA1D2C;
     }
 
     .anticon {
       &::after {
-        color: #face48;
+        color: #EA1D2C;
       }
     }
   }
 
   button {
-    background: #face48;
-    border: 1px solid #face48;
+    background: #EA1D2C;
+    border: 1px solid #EA1D2C;
     margin: 0;
     position: relative;
     left: 17px;
@@ -44,8 +44,8 @@ export const Menu = styled(AntMenu)`
     &:hover,
     &:active,
     &:focus {
-      background: #face48;
-      border: 1px solid #face48;
+      background: #EA1D2C;
+      border: 1px solid #EA1D2C;
     }
   }
 `;

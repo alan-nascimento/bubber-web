@@ -46,7 +46,7 @@ export default function SignIn() {
           </span>
           <Button
             background="primary"
-            loading={loading.toString()}
+            loading={loading}
             disabled={isSubmitting}
           >
             {loading ? (

@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {
+  FaBus,
+  FaRegCreditCard,
+  FiUsers,
+  FaArrowCircleUp,
+  FaArrowCircleDown,
+  FaRegCalendarCheck,
+  MdAttachMoney,
+} from 'react-icons/all';
+import { formatToBRL } from 'brazilian-values';
+import { Bus } from '~/assets';
 
-import { Menu, Excursion, ExcursionDetail, Maps } from '~/components';
+import { Menu, Excursion, ExcursionDetail, Maps, Button } from '~/components';
 import Travel from '../../components/Travel/Travel';
+
+import { formatDate } from '~/utils/date';
 
 import { Container, Content, List } from './Home.styles';
 
@@ -22,7 +35,6 @@ export default function Home() {
 
   useEffect(() => {
     getExcursions();
-    console.warn('props', excursions);
   }, []);
 
   const getExcursions = async () => {
@@ -58,68 +70,210 @@ export default function Home() {
         {showExcursions && (
           <List>
             {excursions.map(excursion => (
-              <Link key={excursion._id} to={`/travelDetail/${excursion._id}`}>
-                <Travel
-                  title={excursion.title}
-                  destiny={excursion.destiny}
-                  image_bg={excursion.image_bg}
-                  date_start={excursion.departure_date}
-                  place_start={excursion.departure_address}
-                  date_end={excursion.return_date}
-                  place_end={excursion.departure_name}
-                  togo={excursion.togo}
-                />
-              </Link>
+              <li key={excursion._id}>
+                <div>
+                  <img src={Bus} alt="Bus" stlye={{ minWidth: '200px' }} />
+                </div>
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <h2 style={{ color: '#EA1D2C', fontWeight: 'bold' }}>
+                    {excursion.title}
+                  </h2>
+                  <h3>Partida</h3>
+                  <div>
+                    <FaArrowCircleDown
+                      color="#777"
+                      size={12}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {excursion.departure.address}, {excursion.departure.number},{' '}
+                    {excursion.departure.city} - {excursion.departure.state}
+                  </div>
+                  <div>
+                    <FaRegCalendarCheck
+                      color="#777"
+                      size={12}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {formatDate(excursion.departure_date)}
+                  </div>
+                  <h3 style={{ marginTop: '10px' }}>Retorno</h3>
+                  <div>
+                    <FaArrowCircleUp
+                      color="#777"
+                      size={12}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {excursion.destination.address},{' '}
+                    {excursion.destination.number}, {excursion.destination.city}{' '}
+                    - {excursion.destination.state}
+                  </div>
+                  <div>
+                    <FaRegCalendarCheck
+                      color="#777"
+                      size={12}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {formatDate(excursion.destination_date)}
+                  </div>
+                  <h3 style={{ marginTop: '10px' }}>Sobre a viagem</h3>
+                  <div>
+                    <FiUsers
+                      color="#777"
+                      size={14}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {excursion.vacancies - excursion.pending_passengers.length}{' '}
+                    vagas disponíveis
+                  </div>
+
+                  <div>
+                    <MdAttachMoney
+                      color="#777"
+                      size={14}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {formatToBRL(excursion.unitary_value)} por pessoa
+                  </div>
+                  <div>
+                    <FaRegCreditCard
+                      color="#777"
+                      size={14}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {excursion.payment_types[0] === 'credit_card' &&
+                      'Cartão de Crédito'}
+                  </div>
+                  <div>
+                    <FaBus
+                      color="#777"
+                      size={14}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {excursion.transport_company}
+                  </div>
+                  <Link
+                    key={excursion._id}
+                    style={{ alignSelf: 'flex-end' }}
+                    to={`/travelDetail/${excursion._id}`}
+                  >
+                    <Button background="primary">
+                      Ver detalhes da excursão
+                    </Button>
+                  </Link>
+                </div>
+              </li>
             ))}
           </List>
         )}
         {showTravel && (
           <List>
             {travels.map(excursion => (
-              <Link key={excursion._id} to={`/travelDetail/${excursion._id}`}>
-                <Travel
-                  title={excursion.title}
-                  destiny={excursion.destiny}
-                  image_bg={excursion.image_bg}
-                  date_start={excursion.departure_date}
-                  place_start={excursion.departure_address}
-                  date_end={excursion.return_date}
-                  place_end={excursion.departure_name}
-                  togo={excursion.togo}
-                />
-              </Link>
-            ))}
-          </List>
-        )}
-        {showNext && (
-          <List>
-            {excursions.filter(excursion => (
-              <Link key={excursion._id} to={`/travelDetail/${excursion._id}`}>
-                <Travel
-                  title={excursion.title}
-                  destiny={excursion.destiny}
-                  image_bg={excursion.image_bg}
-                  date_start={excursion.departure_date}
-                  place_start={excursion.departure_address}
-                  date_end={excursion.return_date}
-                  place_end={excursion.departure_name}
-                  togo={excursion.togo}
-                />
-              </Link>
+              <li key={excursion._id}>
+                <div>
+                  <img src={Bus} alt="Bus" stlye={{ minWidth: '200px' }} />
+                </div>
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <h2 style={{ color: '#EA1D2C', fontWeight: 'bold' }}>
+                    {excursion.title}
+                  </h2>
+                  <h3>Partida</h3>
+                  <div>
+                    <FaArrowCircleDown
+                      color="#777"
+                      size={12}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {excursion.departure.address}, {excursion.departure.number},{' '}
+                    {excursion.departure.city} - {excursion.departure.state}
+                  </div>
+                  <div>
+                    <FaRegCalendarCheck
+                      color="#777"
+                      size={12}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {formatDate(excursion.departure_date)}
+                  </div>
+                  <h3 style={{ marginTop: '10px' }}>Retorno</h3>
+                  <div>
+                    <FaArrowCircleUp
+                      color="#777"
+                      size={12}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {excursion.destination.address},{' '}
+                    {excursion.destination.number}, {excursion.destination.city}{' '}
+                    - {excursion.destination.state}
+                  </div>
+                  <div>
+                    <FaRegCalendarCheck
+                      color="#777"
+                      size={12}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {formatDate(excursion.destination_date)}
+                  </div>
+                  <h3 style={{ marginTop: '10px' }}>Sobre a viagem</h3>
+                  <div>
+                    <FiUsers
+                      color="#777"
+                      size={14}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {excursion.vacancies - excursion.pending_passengers.length}{' '}
+                    vagas disponíveis
+                  </div>
+
+                  <div>
+                    <MdAttachMoney
+                      color="#777"
+                      size={14}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {formatToBRL(excursion.unitary_value)} por pessoa
+                  </div>
+                  <div>
+                    <FaRegCreditCard
+                      color="#777"
+                      size={14}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {excursion.payment_types[0] === 'credit_card' &&
+                      'Cartão de Crédito'}
+                  </div>
+                  <div>
+                    <FaBus
+                      color="#777"
+                      size={14}
+                      style={{ marginRight: '5px' }}
+                    />
+                    {excursion.transport_company}
+                  </div>
+                  <Link
+                    key={excursion._id}
+                    to={`/travelDetail/${excursion._id}`}
+                    style={{ alignSelf: 'flex-end' }}
+                  >
+                    <Button background="primary">Ingressar nesta viagem</Button>
+                  </Link>
+                </div>
+              </li>
             ))}
           </List>
         )}
       </Content>
-      <Maps
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmJhJzAtPxAmtbTUeIexNWrC0Q1d8V_bo&v=3.exp&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `350px`, width: '100%' }} />}
-        mapElement={<div style={{ height: `100%`, width: '100%' }} />}
-        dfLatC={-23.561417}
-        dfLngC={-46.660234}
-        mpLatC={-23.5617714}
-        mpLngC={-46.6601914}
-      />
     </Container>
   );
 }

@@ -1,8 +1,8 @@
 const { addBabelPlugin, override, addLessLoader } = require('customize-cra');
 
 const themeColors = {
-  '@primary-color': '#face48',
-  '@link-color': '#face48',
+  '@primary-color': '#EA1D2C',
+  '@link-color': '#EA1D2C',
 };
 
 module.exports = override(

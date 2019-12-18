@@ -68,10 +68,10 @@ export default function SideMenu({
           <Icon type="car" />
           <span>Proximas viagens</span>
         </Menu.Item>
-        <Menu.Item key="4">
+        {/* <Menu.Item key="4">
           <Icon type="car" />
           <span>Viagens realizadas</span>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     </>
   );

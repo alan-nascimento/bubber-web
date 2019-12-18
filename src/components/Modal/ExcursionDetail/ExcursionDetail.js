@@ -118,7 +118,7 @@ export default function ExcursionDetail({ visible, handleVisible, data = {} }) {
                       <PassagerInfo>
                         <Avatar
                           style={{
-                            backgroundColor: '#face48',
+                            backgroundColor: '#EA1D2C',
                             verticalAlign: 'middle',
                           }}
                           size="large"
@@ -143,7 +143,7 @@ export default function ExcursionDetail({ visible, handleVisible, data = {} }) {
                       <PassagerInfo>
                         <Avatar
                           style={{
-                            backgroundColor: '#face48',
+                            backgroundColor: '#EA1D2C',
                             verticalAlign: 'middle',
                           }}
                           size="large"

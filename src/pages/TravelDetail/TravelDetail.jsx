@@ -75,8 +75,13 @@ class TravelDetail extends Component {
   };
 
   async componentDidMount() {
-    let travelDetail = await api.post(`travelDetail/${this.props.match.params.id}`)
-    this.setState({ travel: travelDetail.data.excursion, travelInfoLoaded: true });
+    let travelDetail = await api.post(
+      `travelDetail/${this.props.match.params.id}`
+    );
+    this.setState({
+      travel: travelDetail.data.excursion,
+      travelInfoLoaded: true,
+    });
   }
   async componentDidMount() {
     let travelDetail = await api.post(
@@ -145,7 +150,6 @@ class TravelDetail extends Component {
                 onChange={callback}
                 size={'small'}
                 animated={false}
-
               >
                 <TabPane tab="Info" key="1">
                   <div className="info-togo">
@@ -200,7 +204,10 @@ class TravelDetail extends Component {
                           {this.state.travel.title}
                         </div>
                         <div className="arrival-time">
-                          {this.state.travel.destination.address}, {this.state.travel.destination.number} - {this.state.travel.destination.city} - {this.state.travel.destination.state}
+                          {this.state.travel.destination.address},{' '}
+                          {this.state.travel.destination.number} -{' '}
+                          {this.state.travel.destination.city} -{' '}
+                          {this.state.travel.destination.state}
                         </div>
                       </div>
                     </div>
@@ -229,8 +236,8 @@ class TravelDetail extends Component {
                       />
                     </div>
                     <p className="vacancy_hint">
-                      Aumente o alcance da sua viagem, tornando sua viagem publica
-                      e divulgando o link nas redes sociais. Quanto mais
+                      Aumente o alcance da sua viagem, tornando sua viagem
+                      publica e divulgando o link nas redes sociais. Quanto mais
                       confirmados, maior será seu destaque no Bubber!!!
                     </p>
                     <div className="vacancy_link_modal">
@@ -298,6 +305,7 @@ class TravelDetail extends Component {
                     <button
                       onClick={() => this.joinToExcursion()}
                       className="btn_participate"
+                      style={{ color: '#fff' }}
                     >
                       Participar
                     </button>

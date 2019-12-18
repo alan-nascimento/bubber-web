@@ -43,7 +43,7 @@ export const Modal = styled(AntdModal)`
   }
 
   .ant-switch-checked {
-    background: #face48;
+    background: #EA1D2C;
   }
 `;
 
@@ -88,7 +88,7 @@ export const Content = styled.div`
     }
 
     a {
-      color: #face48;
+      color: #EA1D2C;
       font-weight: bold;
       margin-top: 15px;
       font-size: 16px;

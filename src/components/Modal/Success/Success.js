@@ -9,14 +9,14 @@ const Modal = styled(ModalBase)`
 
   .ant-btn-primary {
     display: flex;
-    background: #face48;
+    background: #EA1D2C;
     outline: 0;
     border: 0;
 
     &:hover,
     &:active,
     &:focus {
-      background: #face48;
+      background: #EA1D2C;
     }
   }
 `;

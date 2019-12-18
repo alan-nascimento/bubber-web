@@ -24,7 +24,7 @@ const Button = styled.button`
     props.background === 'outline'
       ? '1px solid #767b85'
       : props.background === 'primary-outline'
-      ? '1px solid #face48'
+      ? '1px solid #EA1D2C'
       : props.background === 'success-outline'
       ? '1px solid #4ac79b'
       : 'none'};
@@ -49,7 +49,7 @@ const Button = styled.button`
       : 'none'};
   background-image: ${props =>
     props.background === 'primary' &&
-    'linear-gradient(110deg, #face48, #fcde83)'};
+    'linear-gradient(110deg, #EA1D2C, #EA1D2C)'};
   color: ${props =>
     props.background === 'success-outline'
       ? '#4ac79b'
@@ -59,7 +59,7 @@ const Button = styled.button`
       ? '#ffffff'
       : props.background === 'disabled'
       ? '#ffffff'
-      : '#2d2d2d'};
+      : '#ffffff'};
   font-family: 'Roboto';
   font-size: 16px;
   font-weight: bold;
@@ -91,12 +91,12 @@ const Button = styled.button`
         : 'none'};
     background-image: ${props =>
       props.background === 'primary' &&
-      'linear-gradient(110deg, #f9c116, #fbd151)'};
+      'linear-gradient(110deg, #EA1D2C, #EA1D2C)'};
   }
   &:active {
     background: ${props =>
       props.background === 'primary'
-        ? '#f8bd07'
+        ? '#EA1D2C'
         : props.background === 'outline'
         ? '#e6e6e6'
         : props.background === 'primary-outline'
@@ -110,12 +110,12 @@ const Button = styled.button`
         : 'none'};
     background-image: ${props =>
       props.background === 'primary' &&
-      'linear-gradient(110deg, #f8bd07, #facd42)'};
+      'linear-gradient(110deg, #EA1D2C, #EA1D2C)'};
   }
   &:focus {
     box-shadow: ${props =>
       props.background === 'primary-outline'
-        ? '0px 0px 0 2px #face48'
+        ? '0px 0px 0 2px #EA1D2C'
         : props.background === 'success-outline'
         ? '0px 0px 0 2px #4ac79b'
         : '0px 0px 0 2px #2d2d2d'};
